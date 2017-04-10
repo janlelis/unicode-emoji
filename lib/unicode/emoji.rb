@@ -31,6 +31,8 @@ module Unicode
     RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
     RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
 
+    LIST                          = INDEX[:LIST].freeze.each{ |_, sub_list| sub_list.freeze }
+
     pack = ->(ord){ Regexp.escape(Array(ord).pack("U*")) }
     join = -> (*strings){ "(?:" + strings.join("|") + ")" }
     pack_and_join = ->(ords){  join[*ords.map{ |ord| pack[ord] }] }
@@ -124,6 +126,18 @@ module Unicode
         ["Emoji"] + props.map{ |prop| PROPERTY_NAMES[prop] }
       else
         # nothing
+      end
+    end
+
+    def self.list(key = nil, sub_key = nil)
+      if key
+        if sub_key
+          LIST[key][sub_key]
+        else
+          LIST[key]
+        end
+      else
+        LIST
       end
     end
 

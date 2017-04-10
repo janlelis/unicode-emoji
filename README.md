@@ -2,6 +2,8 @@
 
 A small Ruby library which provides Unicode Emoji data and regexes.
 
+Also includes a categorized list of recommended Emoji.
+
 Emoji version: **5.0**
 
 Supported Rubies: **2.4**, **2.3**, **2.2**, **2.1**
@@ -54,12 +56,29 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digit 1) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`
 `Unicode::Emoji::REGEX_ANY`   | Matches any Emoji-related codepoint (but no variation selectors or tags) | `😴`, `▶`, `🏻`, `🛌`, `🏽`, `🇵`, `🇹`, `2`, `🏴`, `🤾`, `♀`, `🤠`, `🤢` | -
 
+## List
+
+Use `Unicode::Emoji::LIST` or the list method to get a grouped (and ordered) list of Emoji:
+
+```ruby
+Unicode::Emoji.list.keys
+# => ["Smileys & People", "Animals & Nature", "Food & Drink", "Travel & Places", "Activities", "Objects", "Symbols", "Flags"]
+
+Unicode::Emoji.list("Food & Drink").keys
+# => ["food-fruit", "food-vegetable", "food-prepared", "food-asian", "food-sweet", "drink", "dishware"]
+
+Unicode::Emoji.list("Food & Drink", "food-asian")
+=> ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🍡", "\u{1F95F}", "\u{1F960}", "\u{1F961}"]
+```
+
+A markdown file with all recommended emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
 
 ## Also See
 
 - [Unicode® Technical Standard #51](http://www.unicode.org/reports/tr51/proposed.html)
 - [Emoji data](http://unicode.org/Public/emoji/5.0/)
-- [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name)
+- [Emoji categories](http://unicode.org/emoji/charts/emoji-ordering.html)
+- Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name)
 - Part of [unicode-x](https://github.com/janlelis/unicode-x)
 
 ## MIT

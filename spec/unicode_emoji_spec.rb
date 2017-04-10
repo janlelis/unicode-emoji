@@ -292,4 +292,18 @@ describe Unicode::Emoji do
       assert_equal ["1", "😴", "🇵", "🏾", "🏴"], matches
     end
   end
+
+  describe ".list" do
+    it "returns a grouped list of emoji" do
+      assert_includes Unicode::Emoji.list.keys, "Smileys & People"
+    end
+
+    it "sub-groups the list of emoji" do
+      assert_includes Unicode::Emoji.list("Smileys & People").keys, "face-positive"
+    end
+
+    it "has emoji in sub-groups" do
+      assert_includes Unicode::Emoji.list("Smileys & People", "face-positive"), "😎"
+    end
+  end
 end
