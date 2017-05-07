@@ -56,6 +56,8 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digit 1) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`
 `Unicode::Emoji::REGEX_ANY`   | Matches any Emoji-related codepoint (but no variation selectors or tags) | `😴`, `▶`, `🏻`, `🛌`, `🏽`, `🇵`, `🇹`, `2`, `🏴`, `🤾`, `♀`, `🤠`, `🤢` | -
 
+More info about valid vs. recommended emoji in this [blog article on Emojipedia](http://blog.emojipedia.org/unicode-behind-the-curtain/).
+
 ## List
 
 Use `Unicode::Emoji::LIST` or the list method to get a grouped (and ordered) list of Emoji:
