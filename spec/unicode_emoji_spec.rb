@@ -255,6 +255,11 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
+    it "does not match textual singleton emoji in combination with emoji modifiers" do
+      "✌🏻 victory hand" =~ Unicode::Emoji::REGEX_TEXT
+      assert_nil $&
+    end
+
     it "does not match singleton 'component' emoji codepoints" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_TEXT
       assert_nil $&
