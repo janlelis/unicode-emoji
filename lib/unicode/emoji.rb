@@ -48,7 +48,7 @@ module Unicode
 
     text_presentation_sequence = \
       join[
-        pack_and_join[TEXT_PRESENTATION]+ "(?!" + pack[EMOJI_VARIATION_SELECTOR] + ")" + pack[TEXT_VARIATION_SELECTOR] + "?",
+        pack_and_join[TEXT_PRESENTATION]+ "(?!" + pack_and_join[EMOJI_MODIFIERS + [EMOJI_VARIATION_SELECTOR]] + ")" + pack[TEXT_VARIATION_SELECTOR] + "?",
         pack_and_join[EMOJI_PRESENTATION] + pack[TEXT_VARIATION_SELECTOR]
       ]
 
