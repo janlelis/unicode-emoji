@@ -16,16 +16,6 @@ gem "unicode-emoji"
 
 ## Usage
 
-### Properties
-
-Allows you to access the codepoint data form Unicode's [emoji-data.txt](http://unicode.org/Public/emoji/5.0/emoji-data.txt) file:
-
-```ruby
-require "unicode/emoji"
-
-Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
-```
-
 ### Regex
 
 Five Emoji regexes are included, which are compiled out of various Emoji Unicode data.
@@ -58,7 +48,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 
 More info about valid vs. recommended emoji in this [blog article on Emojipedia](http://blog.emojipedia.org/unicode-behind-the-curtain/).
 
-## List
+### List
 
 Use `Unicode::Emoji::LIST` or the list method to get a grouped (and ordered) list of Emoji:
 
@@ -74,6 +64,16 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 ```
 
 A markdown file with all recommended emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
+
+### Properties
+
+Allows you to access the codepoint data form Unicode's [emoji-data.txt](http://unicode.org/Public/emoji/5.0/emoji-data.txt) file:
+
+```ruby
+require "unicode/emoji"
+
+Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
+```
 
 ## Also See
 
