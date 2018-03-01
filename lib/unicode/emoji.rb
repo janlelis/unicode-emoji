@@ -37,26 +37,34 @@ module Unicode
     join = -> (*strings){ "(?:" + strings.join("|") + ")" }
     pack_and_join = ->(ords){  join[*ords.map{ |ord| pack[ord] }] }
 
-    emoji_character = \
-      pack_and_join[EMOJI_CHAR]
+    if ENABLE_NATIVE_EMOJI_UNICODE_PROPERTIES
+      emoji_character     = "\\p{Emoji}"
+      emoji_modifier      = "\\p{Emoji Modifier}"
+      emoji_modifier_base = "\\p{Emoji Modifier Base}"
+      emoji_component     = "\\p{Emoji Component}"
+      emoji_presentation  = "\\p{Emoji Presentation}"
+    else
+      emoji_character     = pack_and_join[EMOJI_CHAR]
+      emoji_modifier      = pack_and_join[EMOJI_MODIFIERS]
+      emoji_modifier_base = pack_and_join[EMOJI_MODIFIER_BASES]
+      emoji_component     = pack_and_join[EMOJI_COMPONENT]
+      emoji_presentation  = pack_and_join[EMOJI_PRESENTATION]
+    end
 
     emoji_presentation_sequence = \
       join[
         pack_and_join[TEXT_PRESENTATION] + pack[EMOJI_VARIATION_SELECTOR],
-        pack_and_join[EMOJI_PRESENTATION] + "(?!" + pack[TEXT_VARIATION_SELECTOR] + ")" + pack[EMOJI_VARIATION_SELECTOR] + "?",
+        emoji_presentation + "(?!" + pack[TEXT_VARIATION_SELECTOR] + ")" + pack[EMOJI_VARIATION_SELECTOR] + "?",
       ]
 
     text_presentation_sequence = \
       join[
-        pack_and_join[TEXT_PRESENTATION]+ "(?!" + pack_and_join[EMOJI_MODIFIERS + [EMOJI_VARIATION_SELECTOR]] + ")" + pack[TEXT_VARIATION_SELECTOR] + "?",
-        pack_and_join[EMOJI_PRESENTATION] + pack[TEXT_VARIATION_SELECTOR]
+        pack_and_join[TEXT_PRESENTATION]+ "(?!" + join[emoji_modifier, pack[EMOJI_VARIATION_SELECTOR]] + ")" + pack[TEXT_VARIATION_SELECTOR] + "?",
+        emoji_presentation + pack[TEXT_VARIATION_SELECTOR]
       ]
 
-    emoji_component = \
-      pack_and_join[EMOJI_COMPONENT]
-
     emoji_modifier_sequence = \
-      pack_and_join[EMOJI_MODIFIER_BASES] + pack_and_join[EMOJI_MODIFIERS]
+      emoji_modifier_base + emoji_modifier
 
     emoji_keycap_sequence = \
       pack_and_join[EMOJI_KEYCAPS] + pack[[EMOJI_VARIATION_SELECTOR, EMOJI_KEYCAP_SUFFIX]]
