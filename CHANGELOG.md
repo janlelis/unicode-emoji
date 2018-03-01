@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### Next
+### 0.9.3
 
 - Implement native Emoji regex matchers, but do not activate or document, yet
 
