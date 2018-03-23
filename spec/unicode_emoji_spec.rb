@@ -3,12 +3,12 @@ require "minitest/autorun"
 
 describe Unicode::Emoji do
   describe ".properties" do
-    it "will return an Array with Emoji properties if codepoints has some" do
+    it "returns an Array for Emoji properties if has codepoints" do
       assert_equal ["Emoji", "Emoji_Presentation"], Unicode::Emoji.properties("😴")
       assert_equal ["Emoji"], Unicode::Emoji.properties("♠")
     end
 
-    it "will return nil with Emoji properties if codepoints has some" do
+    it "returns nil for Emoji properties if has no codepoints" do
       assert_nil Unicode::Emoji.properties("A")
     end
   end
@@ -24,7 +24,7 @@ describe Unicode::Emoji do
       assert_equal "😴\u{FE0F}", $&
     end
 
-    it "does not match singleton emoji when in combination with text variation selector" do
+    it "does not match singleton emoji in combination with text variation selector" do
       "😴\u{FE0E} sleeping face" =~ Unicode::Emoji::REGEX
       assert_nil $&
     end
@@ -34,7 +34,7 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match textual singleton emoji in combination with emoji variation selector" do
+    it "matches textual singleton emoji in combination with emoji variation selector" do
       "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX
       assert_equal "▶\u{FE0F}", $&
     end
@@ -44,7 +44,7 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match modified emoji if modifier base emoji is used" do
+    it "matches modified emoji if modifier base emoji is used" do
       "🛌🏽 person in bed: medium skin tone" =~ Unicode::Emoji::REGEX
       assert_equal "🛌🏽", $&
     end
@@ -54,7 +54,7 @@ describe Unicode::Emoji do
       assert_equal "🌵", $&
     end
 
-    it "does match valid region flags" do
+    it "matches valid region flags" do
       "🇵🇹 Portugal" =~ Unicode::Emoji::REGEX
       assert_equal "🇵🇹", $&
     end
@@ -64,27 +64,27 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match emoji keycap sequences" do
+    it "matches emoji keycap sequences" do
       "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX
       assert_equal "2️⃣", $&
     end
 
-    it "does match recommended tag sequences" do
+    it "matches recommended tag sequences" do
       "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX
       assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
     end
 
-    it "does not match valid tag sequences which are not recommended" do
+    it "does not match valid tag sequences that are not recommended" do
       "🏴󠁧󠁢󠁡󠁧󠁢󠁿 GB AGB" =~ Unicode::Emoji::REGEX
       assert_equal "🏴", $& # only base flag is matched
     end
 
-    it "does match recommended zwj sequences" do
+    it "matches recommended zwj sequences" do
       "🤾🏽‍♀️ woman playing handball: medium skin tone" =~ Unicode::Emoji::REGEX
       assert_equal "🤾🏽‍♀️", $&
     end
 
-    it "does not match valid zwj sequences which are not recommended" do
+    it "does not match valid zwj sequences that are not recommended" do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX
       assert_equal "🤠", $&
     end
@@ -111,7 +111,7 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match textual singleton emoji in combination with emoji variation selector" do
+    it "matches textual singleton emoji in combination with emoji variation selector" do
       "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "▶\u{FE0F}", $&
     end
@@ -121,7 +121,7 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match modified emoji if modifier base emoji is used" do
+    it "matches modified emoji if modifier base emoji is used" do
       "🛌🏽 person in bed: medium skin tone" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🛌🏽", $&
     end
@@ -131,7 +131,7 @@ describe Unicode::Emoji do
       assert_equal "🌵", $&
     end
 
-    it "does match valid region flags" do
+    it "matches valid region flags" do
       "🇵🇹 Portugal" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🇵🇹", $&
     end
@@ -141,17 +141,17 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match emoji keycap sequences" do
+    it "matches emoji keycap sequences" do
       "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "2️⃣", $&
     end
 
-    it "does match recommended tag sequences" do
+    it "matches recommended tag sequences" do
       "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
     end
 
-    it "does match valid tag sequences, even though they are not recommended" do
+    it "matches valid tag sequences, even though they are not recommended" do
       "🏴󠁧󠁢󠁡󠁧󠁢󠁿 GB AGB" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🏴󠁧󠁢󠁡󠁧󠁢󠁿", $&
     end
@@ -161,12 +161,12 @@ describe Unicode::Emoji do
       assert_equal "🏴", $&
     end
 
-    it "does match recommended zwj sequences" do
+    it "matches recommended zwj sequences" do
       "🤾🏽‍♀️ woman playing handball: medium skin tone" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🤾🏽‍♀️", $&
     end
 
-    it "does match valid zwj sequences, even though they are not recommended" do
+    it "matches valid zwj sequences, even though they are not recommended" do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🤠‍🤢", $&
     end
@@ -193,7 +193,7 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match textual singleton emoji in combination with emoji variation selector" do
+    it "matches textual singleton emoji in combination with emoji variation selector" do
       "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX
       assert_equal "▶\u{FE0F}", $&
     end
@@ -240,12 +240,12 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does match singleton emoji in combination with text variation selector" do
+    it "matches singleton emoji in combination with text variation selector" do
       "😴\u{FE0E} sleeping face" =~ Unicode::Emoji::REGEX_TEXT
       assert_equal "😴\u{FE0E}", $&
     end
 
-    it "does match textual singleton emoji" do
+    it "matches textual singleton emoji" do
       "▶ play button" =~ Unicode::Emoji::REGEX_TEXT
       assert_equal "▶", $&
     end
