@@ -6,7 +6,7 @@ Also includes a categorized list of recommended Emoji.
 
 Emoji version: **5.0**
 
-Supported Rubies: **2.5**, **2.4**, **2.3**, **2.2**
+Supported Rubies: **2.5**, **2.4**, **2.3**
 
 Unsupported Rubies, but may still work: **2.1**
 

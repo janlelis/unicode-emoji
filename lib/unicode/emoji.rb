@@ -31,7 +31,7 @@ module Unicode
     RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
     RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
 
-    LIST                          = INDEX[:LIST].freeze.each{ |_, sub_list| sub_list.freeze }
+    LIST                          = INDEX[:LIST].freeze.each_value(&:freeze)
 
     pack = ->(ord){ Regexp.escape(Array(ord).pack("U*")) }
     join = -> (*strings){ "(?:" + strings.join("|") + ")" }
@@ -138,15 +138,8 @@ module Unicode
     end
 
     def self.list(key = nil, sub_key = nil)
-      if key
-        if sub_key
-          LIST[key][sub_key]
-        else
-          LIST[key]
-        end
-      else
-        LIST
-      end
+      return LIST unless key || sub_key
+      LIST.dig(*[key, sub_key].compact)
     end
 
     def self.get_codepoint_value(char)

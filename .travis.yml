@@ -19,7 +19,7 @@ matrix:
   allow_failures:
     - rvm: jruby-head
     - rvm: ruby-head
+    - rvm: 2.2
     - rvm: 2.1
     - rvm: 2.0
 #   fast_finish: true
-
