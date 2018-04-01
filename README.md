@@ -8,7 +8,7 @@ Emoji version: **5.0**
 
 Supported Rubies: **2.5**, **2.4**, **2.3**
 
-Unsupported Rubies, but may still work: **2.1**
+If you are stuck on an older Ruby version, checkout the latest [0.9 version](https://rubygems.org/gems/unicode-emoji/versions/0.9.3) of this gem.
 
 ## Gemfile
 

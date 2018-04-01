@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 1.0.0
+
+- Drop support for Ruby below 2.3, use 0.9 if you need to
+- Internal refactorings, no API change
+
 ### 0.9.3
 
 - Implement native Emoji regex matchers, but do not activate or document, yet
