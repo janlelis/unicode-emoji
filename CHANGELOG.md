@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 1.0.1
+
+- Actually set required Ruby version to 2.3 in gemspec
+
 ### 1.0.0
 
 - Drop support for Ruby below 2.3, use 0.9 if you need to
