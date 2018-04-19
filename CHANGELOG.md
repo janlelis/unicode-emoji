@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 1.0.3
+
+- Explicitly load rubygems/util, fixes regression in 1.2.1
+
 ### 1.0.2
 
 - Use `Gem::Util` for `gunzip`, removes deprecation warning
