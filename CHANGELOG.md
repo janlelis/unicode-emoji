@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### Next
+### 1.0.2
 
 - Use `Gem::Util` for `gunzip`, removes deprecation warning
 
