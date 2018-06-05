@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### Next
+### 1.1.0
 
 - Emoji 11.0
 - Do not depend on rubygems (only use zlib stdlib for unzipping)
