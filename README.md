@@ -4,7 +4,7 @@ A small Ruby library which provides Unicode Emoji data and regexes.
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **5.0**
+Emoji version: **11.0**
 
 Supported Rubies: **2.5**, **2.4**, **2.3**
 
@@ -48,7 +48,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digit 1) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`
 `Unicode::Emoji::REGEX_ANY`   | Matches any Emoji-related codepoint (but no variation selectors or tags) | `😴`, `▶`, `🏻`, `🛌`, `🏽`, `🇵`, `🇹`, `2`, `🏴`, `🤾`, `♀`, `🤠`, `🤢` | -
 
-More info about valid vs. recommended emoji in this [blog article on Emojipedia](http://blog.emojipedia.org/unicode-behind-the-curtain/).
+More info about valid vs. recommended Emoji in this [blog article on Emojipedia](http://blog.emojipedia.org/unicode-behind-the-curtain/).
 
 ### List
 
@@ -65,11 +65,11 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 => ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🍡", "\u{1F95F}", "\u{1F960}", "\u{1F961}"]
 ```
 
-A markdown file with all recommended emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
+A markdown file with all recommended Emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
 
 ### Properties
 
-Allows you to access the codepoint data form Unicode's [emoji-data.txt](http://unicode.org/Public/emoji/5.0/emoji-data.txt) file:
+Allows you to access the codepoint data form Unicode's [emoji-data.txt](http://unicode.org/Public/emoji/11.0/emoji-data.txt) file:
 
 ```ruby
 require "unicode/emoji"
@@ -80,7 +80,7 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 ## Also See
 
 - [Unicode® Technical Standard #51](http://www.unicode.org/reports/tr51/proposed.html)
-- [Emoji data](http://unicode.org/Public/emoji/5.0/)
+- [Emoji data](http://unicode.org/Public/emoji/11.0/)
 - [Emoji categories](http://unicode.org/emoji/charts/emoji-ordering.html)
 - Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name)
 - Part of [unicode-x](https://github.com/janlelis/unicode-x)

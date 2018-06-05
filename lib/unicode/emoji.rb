@@ -6,10 +6,12 @@ require_relative "emoji/index"
 module Unicode
   module Emoji
     PROPERTY_NAMES = {
+      E: "Emoji",
       B: "Emoji_Modifier_Base",
       M: "Emoji_Modifier",
       C: "Emoji_Component",
       P: "Emoji_Presentation",
+      X: "Extended_Pictographic",
     }
 
     EMOJI_VARIATION_SELECTOR      = 0xFE0F
@@ -19,12 +21,14 @@ module Unicode
     EMOJI_KEYCAP_SUFFIX           = 0x20E3
     ZWJ                           = 0x200D
 
-    EMOJI_CHAR                    = INDEX[:PROPERTIES].keys.freeze
+    EMOJI_CHAR                    = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:E) }.keys.freeze
     EMOJI_PRESENTATION            = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:P) }.keys.freeze
-    TEXT_PRESENTATION             = INDEX[:PROPERTIES].select{ |ord, props| !props.include?(:P) }.keys.freeze
+    TEXT_PRESENTATION             = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:E) && !props.include?(:P) }.keys.freeze
     EMOJI_COMPONENT               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:C) }.keys.freeze
     EMOJI_MODIFIER_BASES          = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:B) }.keys.freeze
     EMOJI_MODIFIERS               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:M) }.keys.freeze
+    # Not needed right now:
+    # EXTENDED_PICTOGRAPHIC         = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) }.keys.freeze
     EMOJI_KEYCAPS                 = INDEX[:KEYCAPS].freeze
     VALID_REGION_FLAGS            = INDEX[:FLAGS].freeze
     VALID_SUBDIVISIONS            = INDEX[:SD].freeze
@@ -131,7 +135,7 @@ module Unicode
       props = INDEX[:PROPERTIES][ord]
 
       if props
-        ["Emoji"] + props.map{ |prop| PROPERTY_NAMES[prop] }
+        props.map{ |prop| PROPERTY_NAMES[prop] }
       else
         # nothing
       end
