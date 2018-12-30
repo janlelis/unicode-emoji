@@ -2,12 +2,13 @@ sudo: false
 language: ruby
 
 rvm:
-- ruby-head
+- 2.6.0
 - 2.5.1
 - 2.4.4
 - 2.3.7
+- ruby-head
 - jruby-head
-- jruby-9.1.16.0
+- jruby-9.2.5.0
 
 matrix:
   allow_failures:
