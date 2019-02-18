@@ -158,7 +158,7 @@ describe Unicode::Emoji do
 
     it "does not match invalid tag sequences" do
       "🏴󠁧󠁢󠁡󠁡󠁡󠁿 GB AAA" =~ Unicode::Emoji::REGEX_VALID
-      assert_equal "🏴", $&
+      assert_equal "🏴", $& # only base flag is matched
     end
 
     it "matches recommended zwj sequences" do
@@ -168,6 +168,88 @@ describe Unicode::Emoji do
 
     it "matches valid zwj sequences, even though they are not recommended" do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX_VALID
+      assert_equal "🤠‍🤢", $&
+    end
+  end
+
+  describe "REGEX_WELL_FORMED" do
+    it "matches most singleton emoji codepoints" do
+      "😴 sleeping face" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "😴", $&
+    end
+
+    it "matches singleton emoji in combination with emoji variation selector" do
+      "😴\u{FE0F} sleeping face" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "😴\u{FE0F}", $&
+    end
+
+    it "does not match singleton emoji when in combination with text variation selector" do
+      "😴\u{FE0E} sleeping face" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
+    end
+
+    it "does not match textual singleton emoji" do
+      "▶ play button" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
+    end
+
+    it "matches textual singleton emoji in combination with emoji variation selector" do
+      "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "▶\u{FE0F}", $&
+    end
+
+    it "does not match singleton 'component' emoji codepoints" do
+      "🏻 light skin tone" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
+    end
+
+    it "matches modified emoji if modifier base emoji is used" do
+      "🛌🏽 person in bed: medium skin tone" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🛌🏽", $&
+    end
+
+    it "does not match modified emoji if no modifier base emoji is used" do
+      "🌵🏽 cactus" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🌵", $&
+    end
+
+    it "matches valid region flags" do
+      "🇵🇹 Portugal" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🇵🇹", $&
+    end
+
+    it "does match invalid region flags" do
+      "🇵🇵 PP Land" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🇵🇵", $&
+    end
+
+    it "matches emoji keycap sequences" do
+      "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "2️⃣", $&
+    end
+
+    it "matches recommended tag sequences" do
+      "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
+    end
+
+    it "matches valid tag sequences, even though they are not recommended" do
+      "🏴󠁧󠁢󠁡󠁧󠁢󠁿 GB AGB" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🏴󠁧󠁢󠁡󠁧󠁢󠁿", $&
+    end
+
+    it "does match invalid tag sequences" do
+      "😴󠁧󠁢󠁡󠁡󠁡󠁿 GB AAA" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "😴󠁧󠁢󠁡󠁡󠁡󠁿", $&
+    end
+
+    it "matches recommended zwj sequences" do
+      "🤾🏽‍♀️ woman playing handball: medium skin tone" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🤾🏽‍♀️", $&
+    end
+
+    it "matches valid zwj sequences, even though they are not recommended" do
+      "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_equal "🤠‍🤢", $&
     end
   end

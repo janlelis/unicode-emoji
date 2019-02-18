@@ -18,8 +18,10 @@ module Unicode
     TEXT_VARIATION_SELECTOR       = 0xFE0E
     EMOJI_TAG_BASE_FLAG           = 0x1F3F4
     CANCEL_TAG                    = 0xE007F
+    TAGS                          = [*0xE0020..0xE007E]
     EMOJI_KEYCAP_SUFFIX           = 0x20E3
     ZWJ                           = 0x200D
+    REGIONAL_INDICATORS           = [*0x1F1E6..0x1F1FF]
 
     EMOJI_CHAR                    = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:E) }.keys.freeze
     EMOJI_PRESENTATION            = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:P) }.keys.freeze
@@ -80,26 +82,50 @@ module Unicode
     emoji_keycap_sequence = \
       pack_and_join[EMOJI_KEYCAPS] + pack[[EMOJI_VARIATION_SELECTOR, EMOJI_KEYCAP_SUFFIX]]
 
-    emoji_flag_sequence = \
+    emoji_valid_flag_sequence = \
       pack_and_join[VALID_REGION_FLAGS]
 
-    emoji_core_sequence = \
+    emoji_well_formed_flag_sequence = \
+      "(?:" +
+        pack_and_join[REGIONAL_INDICATORS] +
+        pack_and_join[REGIONAL_INDICATORS] +
+      ")"
+
+    emoji_valid_core_sequence = \
       join[
         # emoji_character,
         emoji_keycap_sequence,
         emoji_modifier_sequence,
         non_component_emoji_presentation_sequence,
-        emoji_flag_sequence,
+        emoji_valid_flag_sequence,
+      ]
+
+    emoji_well_formed_core_sequence = \
+      join[
+        # emoji_character,
+        emoji_keycap_sequence,
+        emoji_modifier_sequence,
+        non_component_emoji_presentation_sequence,
+        emoji_well_formed_flag_sequence,
       ]
 
     emoji_rgi_tag_sequence = \
       pack_and_join[RECOMMENDED_SUBDIVISION_FLAGS]
 
-    # EMOJI_TAGS.map{ |base, spec| "(?:" + pack[base] + "[" + pack[spec] + "]+" + pack[CANCEL_TAG] + ")" }.join("|") +
     emoji_valid_tag_sequence = \
       "(?:" +
         pack[EMOJI_TAG_BASE_FLAG] +
         "(?:" + VALID_SUBDIVISIONS.map{ |sd| Regexp.escape(sd.tr("\u{20}-\u{7E}", "\u{E0020}-\u{E007E}"))}.join("|") + ")" +
+        pack[CANCEL_TAG] +
+      ")"
+
+    emoji_well_formed_tag_sequence = \
+      "(?:" +
+        join[
+          non_component_emoji_presentation_sequence,
+          emoji_modifier_sequence,
+        ] +
+        pack_and_join[TAGS] + "+" +
         pack[CANCEL_TAG] +
       ")"
 
@@ -122,21 +148,31 @@ module Unicode
       join[
         emoji_rgi_zwj_sequence,
         emoji_rgi_tag_sequence,
-        emoji_core_sequence,
+        emoji_valid_core_sequence,
       ]
 
     emoji_valid_sequence = \
       join[
         emoji_valid_zwj_sequence,
         emoji_valid_tag_sequence,
-        emoji_core_sequence,
+        emoji_valid_core_sequence,
       ]
 
-    # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences
+    emoji_well_formed_sequence = \
+      join[
+        emoji_valid_zwj_sequence,
+        emoji_well_formed_tag_sequence,
+        emoji_well_formed_core_sequence,
+      ]
+
+    # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
     REGEX = Regexp.compile(emoji_rgi_sequence)
 
     # Matches basic singleton emoji and all kind of valid sequences
     REGEX_VALID = Regexp.compile(emoji_valid_sequence)
+
+    # Matches basic singleton emoji and all kind of sequences
+    REGEX_WELL_FORMED = Regexp.compile(emoji_well_formed_sequence)
 
     # Matches only basic single, non-textual emoji
     # Ignores "components" like modifiers or simple digits
