@@ -3,6 +3,7 @@
 ### Next
 
 - Emoji 12.0 data
+- Refactoring: Update Emoji matching to latest standard while keeping naming close to standard
 - Issue warning when using `#list` method to retrieve outdated category
 
 ### 1.1.0
