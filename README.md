@@ -67,6 +67,8 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 => ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🍡", "\u{1F95F}", "\u{1F960}", "\u{1F961}"]
 ```
 
+Please note that categories might change with future versions of the Emoji standard. This gem will issue warnings when attemting to retrieve old categories using the `#list` method.
+
 A markdown file with all recommended Emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
 
 ### Properties

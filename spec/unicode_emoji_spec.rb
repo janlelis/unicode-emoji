@@ -300,15 +300,21 @@ describe Unicode::Emoji do
 
   describe ".list" do
     it "returns a grouped list of emoji" do
-      assert_includes Unicode::Emoji.list.keys, "Smileys & People"
+      assert_includes Unicode::Emoji.list.keys, "Smileys & Emotion"
     end
 
     it "sub-groups the list of emoji" do
-      assert_includes Unicode::Emoji.list("Smileys & People").keys, "face-positive"
+      assert_includes Unicode::Emoji.list("Smileys & Emotion").keys, "face-glasses"
     end
 
     it "has emoji in sub-groups" do
-      assert_includes Unicode::Emoji.list("Smileys & People", "face-positive"), "😎"
+      assert_includes Unicode::Emoji.list("Smileys & Emotion", "face-glasses"), "😎"
+    end
+
+    it "issues a warning if attempting to retrieve old category" do
+      assert_output nil, "Warning(unicode-emoji): The category of Smileys & People does not exist anymore\n" do
+        assert_nil Unicode::Emoji.list("Smileys & People", "face-positive")
+      end
     end
   end
 end

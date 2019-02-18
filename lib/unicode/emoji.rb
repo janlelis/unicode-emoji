@@ -36,6 +36,10 @@ module Unicode
     RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
 
     LIST                          = INDEX[:LIST].freeze.each_value(&:freeze)
+    LIST_REMOVED_KEYS             = [
+      "Smileys & People",
+      "Component",
+    ]
 
     pack = ->(ord){ Regexp.escape(Array(ord).pack("U*")) }
     join = -> (*strings){ "(?:" + strings.join("|") + ")" }
@@ -143,6 +147,9 @@ module Unicode
 
     def self.list(key = nil, sub_key = nil)
       return LIST unless key || sub_key
+      if LIST_REMOVED_KEYS.include?(key)
+        $stderr.puts "Warning(unicode-emoji): The category of #{key} does not exist anymore"
+      end
       LIST.dig(*[key, sub_key].compact)
     end
 
