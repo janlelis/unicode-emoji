@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### Next
+
+- Emoji 12.0 data
+
 ### 1.1.0
 
 - Emoji 11.0
