@@ -6,6 +6,7 @@
 - Introduce new `REGEX_WELL_FORMED` to be able to match for invalid tag and region sequences
 - Refactoring: Update Emoji matching to latest standard while keeping naming close to standard
 - Issue warning when using `#list` method to retrieve outdated category
+- Change matching for ZWJ sequences: Do not limit sequence to a maximum of 3 ZWJs
 
 ### 1.1.0
 

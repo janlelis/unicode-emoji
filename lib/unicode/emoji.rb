@@ -141,7 +141,7 @@ module Unicode
 
     emoji_valid_zwj_sequence = \
       "(?:" +
-        "(?:" + emoji_valid_zwj_element + pack[ZWJ] + "){1,3}" + emoji_valid_zwj_element +
+        "(?:" + emoji_valid_zwj_element + pack[ZWJ] + ")+" + emoji_valid_zwj_element +
       ")"
 
     emoji_rgi_sequence = \
