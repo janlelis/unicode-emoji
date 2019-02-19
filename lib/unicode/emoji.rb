@@ -186,10 +186,15 @@ module Unicode
       "(?!" + emoji_component + ")" + text_presentation_sequence
     )
 
-    # Matches any emoji-related codepoint
+    # Matches any emoji-related codepoint - Use with caution (returns partil matches)
     REGEX_ANY = Regexp.compile(
       emoji_character
     )
+
+    # Combined REGEXes which also match for TEXTUAL emoji
+    REGEX_INCLUDE_TEXT = Regexp.union(REGEX, REGEX_TEXT)
+    REGEX_VALID_INCLUDE_TEXT = Regexp.union(REGEX_VALID, REGEX_TEXT)
+    REGEX_WELL_FORMED_INCLUDE_TEXT = Regexp.union(REGEX_WELL_FORMED, REGEX_TEXT)
 
     def self.properties(char)
       ord = get_codepoint_value(char)
