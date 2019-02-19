@@ -2,7 +2,7 @@
 
 ### Next
 
-- Emoji 12.0 data
+- Emoji 12.0 data (including valid subdivisions)
 - Introduce new `REGEX_WELL_FORMED` to be able to match for invalid tag and region sequences
 - Introduce new `*_INCLUDE_TEXT` regexes which include matching for textual presentation emoji
 - Refactoring: Update Emoji matching to latest standard while keeping naming close to standard
