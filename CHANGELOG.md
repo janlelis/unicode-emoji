@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### Next
+### 2.0.0
 
 - Emoji 12.0 data (including valid subdivisions)
 - Introduce new `REGEX_WELL_FORMED` to be able to match for invalid tag and region sequences

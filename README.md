@@ -4,7 +4,7 @@ A small Ruby library which provides Unicode Emoji data and regexes.
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **11.0**
+Emoji version: **12.0** (February 2018)
 
 Supported Rubies: **2.6**, **2.5**, **2.4**, **2.3**
 
