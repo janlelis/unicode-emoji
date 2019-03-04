@@ -115,7 +115,7 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 
 Please note that categories might change with future versions of the Emoji standard. This gem will issue warnings when attemting to retrieve old categories using the `#list` method.
 
-A markdown file with all recommended Emoji can be found [in this gist](https://gist.github.com/janlelis/72f9be1f0ecca07372c64cf13894b801).
+A list of all Emoji can be found at [character.construction](https://character.construction).
 
 ### Properties
 
