@@ -93,9 +93,9 @@ Regex                         | Description | Example Matches | Example Non-Matc
 
 `Unicode::Emoji::REGEX_PICTO` matches single codepoints with the **Extended_Pictographic** property. For example, it will match `✀` BLACK SAFETY SCISSORS.
 
-`Unicode::Emoji::REGEX_PICTO_NO_EMOJI` matches single codepoints with the **Extended_Pictographic** property, but excludes emoji characters.
+`Unicode::Emoji::REGEX_PICTO_NO_EMOJI` matches single codepoints with the **Extended_Pictographic** property, but excludes Emoji characters.
 
-See [character.construction/picto](https://character.construction/picto) for a list of all pictographic characters.
+See [character.construction/picto](https://character.construction/picto) for a list of all non-Emoji pictographic characters.
 
 #### Partial Regexes
 
