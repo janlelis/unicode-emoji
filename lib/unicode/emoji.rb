@@ -29,8 +29,9 @@ module Unicode
     EMOJI_COMPONENT               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:C) }.keys.freeze
     EMOJI_MODIFIER_BASES          = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:B) }.keys.freeze
     EMOJI_MODIFIERS               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:M) }.keys.freeze
-    # Not needed right now:
-    # EXTENDED_PICTOGRAPHIC         = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) }.keys.freeze
+
+    EXTENDED_PICTOGRAPHIC         = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) }.keys.freeze
+    EXTENDED_PICTOGRAPHIC_NO_EMOJI= INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) && !props.include?(:E) }.keys.freeze
     EMOJI_KEYCAPS                 = INDEX[:KEYCAPS].freeze
     VALID_REGION_FLAGS            = INDEX[:FLAGS].freeze
     VALID_SUBDIVISIONS            = INDEX[:SD].freeze
@@ -53,12 +54,16 @@ module Unicode
       emoji_modifier_base = "\\p{Emoji Modifier Base}"
       emoji_component     = "\\p{Emoji Component}"
       emoji_presentation  = "\\p{Emoji Presentation}"
+      picto               = "\\p{Extended Pictographic}"
+      picto_no_emoji      = "\\p{Extended Pictographic}(?<!\\p{Emoji})"
     else
       emoji_character     = pack_and_join[EMOJI_CHAR]
       emoji_modifier      = pack_and_join[EMOJI_MODIFIERS]
       emoji_modifier_base = pack_and_join[EMOJI_MODIFIER_BASES]
       emoji_component     = pack_and_join[EMOJI_COMPONENT]
       emoji_presentation  = pack_and_join[EMOJI_PRESENTATION]
+      picto               = pack_and_join[EXTENDED_PICTOGRAPHIC]
+      picto_no_emoji      = pack_and_join[EXTENDED_PICTOGRAPHIC_NO_EMOJI]
     end
 
     emoji_presentation_sequence = \
@@ -195,6 +200,14 @@ module Unicode
     REGEX_INCLUDE_TEXT = Regexp.union(REGEX, REGEX_TEXT)
     REGEX_VALID_INCLUDE_TEXT = Regexp.union(REGEX_VALID, REGEX_TEXT)
     REGEX_WELL_FORMED_INCLUDE_TEXT = Regexp.union(REGEX_WELL_FORMED, REGEX_TEXT)
+
+    REGEX_PICTO = Regexp.compile(
+      picto
+    )
+
+    REGEX_PICTO_NO_EMOJI = Regexp.compile(
+      picto_no_emoji
+    )
 
     def self.properties(char)
       ord = get_codepoint_value(char)

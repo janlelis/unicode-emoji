@@ -4,8 +4,8 @@ require "minitest/autorun"
 describe Unicode::Emoji do
   describe ".properties" do
     it "returns an Array for Emoji properties if has codepoints" do
-      assert_equal ["Emoji", "Emoji_Presentation"], Unicode::Emoji.properties("😴")
-      assert_equal ["Emoji"], Unicode::Emoji.properties("♠")
+      assert_equal ["Emoji", "Emoji_Presentation", "Extended_Pictographic"], Unicode::Emoji.properties("😴")
+      assert_equal ["Emoji", "Extended_Pictographic"], Unicode::Emoji.properties("♠")
     end
 
     it "returns nil for Emoji properties if has no codepoints" do
@@ -377,6 +377,20 @@ describe Unicode::Emoji do
     it "returns any emoji-related codepoint (but no variation selectors or tags)" do
       matches = "1 string 😴\u{FE0F} sleeping face with 🇵 and modifier 🏾, also 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland".scan(Unicode::Emoji::REGEX_ANY)
       assert_equal ["1", "😴", "🇵", "🏾", "🏴"], matches
+    end
+  end
+
+  describe "REGEX_PICTO" do
+    it "matches codepoints with Extended_Pictograph property (almost all emoji are, but also others)" do
+      matches = "U+1F32D 🌭 HOT DOG, U+203C ‼ DOUBLE EXCLAMATION MARK, U+26E8 ⛨ BLACK CROSS ON SHIELD".scan(Unicode::Emoji::REGEX_PICTO)
+      assert_equal ["🌭", "‼", "⛨"], matches
+    end
+  end
+
+  describe "REGEX_PICTO" do
+    it "matches codepoints with Extended_Pictograph property, but no Emoji property" do
+      matches = "U+1F32D 🌭 HOT DOG, U+203C ‼ DOUBLE EXCLAMATION MARK, U+26E8 ⛨ BLACK CROSS ON SHIELD".scan(Unicode::Emoji::REGEX_PICTO_NO_EMOJI)
+      assert_equal ["⛨"], matches
     end
   end
 

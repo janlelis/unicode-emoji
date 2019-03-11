@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### Next
+
+- Add `REGEX_PICTO` which matches codepoints with the **Extended_Pictographic** property
+- Add `REGEX_PICTO_NO_EMOJI` which matches codepoints with the **Extended_Pictographic** property, but no **Emoji** property
+
 ### 2.0.0
 
 - Emoji 12.0 data (including valid subdivisions)
