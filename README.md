@@ -4,7 +4,9 @@ A small Ruby library which provides Unicode Emoji data and regexes.
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **12.0** (February 2018)
+Emoji version: **12.0** (February 2019)
+
+CLDR version (used for sub-region flags): **36** (October 2019)
 
 Supported Rubies: **2.6**, **2.5**, **2.4**, **2.3**
 

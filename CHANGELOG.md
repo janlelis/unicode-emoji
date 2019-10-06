@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.2.0
+
+- Update subdivisions to CLDR 36
+
 ### 2.1.0
 
 - Add `REGEX_PICTO` which matches codepoints with the **Extended_Pictographic** property
