@@ -88,6 +88,11 @@ describe Unicode::Emoji do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX
       assert_equal "🤠", $&
     end
+
+    it "matches 12.1 emoji" do
+      "🧑‍🦱 person: curly hair" =~ Unicode::Emoji::REGEX
+      assert_equal "🧑‍🦱", $&
+    end
   end
 
   describe "REGEX_VALID" do
