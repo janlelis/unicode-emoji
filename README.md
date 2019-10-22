@@ -4,7 +4,7 @@ A small Ruby library which provides Unicode Emoji data and regexes.
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **12.0** (February 2019)
+Emoji version: **12.1** (October 2019)
 
 CLDR version (used for sub-region flags): **36** (October 2019)
 
@@ -114,22 +114,22 @@ Use `Unicode::Emoji::LIST` or the list method to get a grouped (and ordered) lis
 
 ```ruby
 Unicode::Emoji.list.keys
-# => ["Smileys & People", "Animals & Nature", "Food & Drink", "Travel & Places", "Activities", "Objects", "Symbols", "Flags"]
+# => ["Smileys & Emotion", "People & Body", "Component", "Animals & Nature", "Food & Drink", "Travel & Places", "Activities", "Objects", "Symbols", "Flags"]
 
 Unicode::Emoji.list("Food & Drink").keys
-# => ["food-fruit", "food-vegetable", "food-prepared", "food-asian", "food-sweet", "drink", "dishware"]
+# => ["food-fruit", "food-vegetable", "food-prepared", "food-asian", "food-marine", "food-sweet", "drink", "dishware"]
 
 Unicode::Emoji.list("Food & Drink", "food-asian")
-=> ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🍡", "\u{1F95F}", "\u{1F960}", "\u{1F961}"]
+=> ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🥮", "🍡", "🥟", "🥠", "🥡"]
 ```
 
-Please note that categories might change with future versions of the Emoji standard. This gem will issue warnings when attemting to retrieve old categories using the `#list` method.
+Please note that categories might change with future versions of the Emoji standard. This gem will issue warnings when attempting to retrieve old categories using the `#list` method.
 
 A list of all Emoji can be found at [character.construction](https://character.construction).
 
 ### Properties
 
-Allows you to access the codepoint data form Unicode's [emoji-data.txt](http://unicode.org/Public/emoji/11.0/emoji-data.txt) file:
+Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://unicode.org/Public/emoji/12.1/emoji-data.txt) file:
 
 ```ruby
 require "unicode/emoji"
@@ -139,13 +139,12 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 
 ## Also See
 
-- [Unicode® Technical Standard #51](http://www.unicode.org/reports/tr51/proposed.html)
-- [Emoji data](http://unicode.org/Public/emoji/11.0/)
-- [Emoji categories](http://unicode.org/emoji/charts/emoji-ordering.html)
+- [Unicode® Technical Standard #51](https://www.unicode.org/reports/tr51/proposed.html)
+- [Emoji categories](https://unicode.org/emoji/charts/emoji-ordering.html)
 - Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name)
 - Part of [unicode-x](https://github.com/janlelis/unicode-x)
 
 ## MIT
 
-- Copyright (C) 2017-2019 Jan Lelis <http://janlelis.com>. Released under the MIT license.
-- Unicode data: http://www.unicode.org/copyright.html#Exhibit1
+- Copyright (C) 2017-2019 Jan Lelis <https://janlelis.com>. Released under the MIT license.
+- Unicode data: https://www.unicode.org/copyright.html#Exhibit1

@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.3.0 (unreleased)
+
+- Emoji 12.1
+
 ### 2.2.0
 
 - Update subdivisions to CLDR 36

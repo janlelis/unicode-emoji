@@ -41,7 +41,6 @@ module Unicode
     LIST                          = INDEX[:LIST].freeze.each_value(&:freeze)
     LIST_REMOVED_KEYS             = [
       "Smileys & People",
-      "Component",
     ]
 
     pack = ->(ord){ Regexp.escape(Array(ord).pack("U*")) }

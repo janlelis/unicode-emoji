@@ -3,7 +3,7 @@
 module Unicode
   module Emoji
     VERSION = "2.2.0"
-    EMOJI_VERSION = "12.0"
+    EMOJI_VERSION = "12.1"
     CLDR_VERSION = "36"
     DATA_DIRECTORY = File.expand_path(File.dirname(__FILE__) + "/../../../data/").freeze
     INDEX_FILENAME = (DATA_DIRECTORY + "/emoji.marshal.gz").freeze
