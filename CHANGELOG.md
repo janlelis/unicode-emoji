@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### 2.3.0 (unreleased)
+### 2.3.0
 
 - Emoji 12.1
 
