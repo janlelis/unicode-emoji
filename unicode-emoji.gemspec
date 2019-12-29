@@ -6,9 +6,9 @@ Gem::Specification.new do |gem|
   gem.name          = "unicode-emoji"
   gem.version       = Unicode::Emoji::VERSION
   gem.summary       = "Retrieve Emoji data about Unicode codepoints."
-  gem.description   = "[Emoji #{Unicode::Emoji::EMOJI_VERSION}] Retrieve emoji data about Unicode codepoints. Also contains a regex to match emoji."
+  gem.description   = "[Emoji #{Unicode::Emoji::EMOJI_VERSION}] A small Ruby library which provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards. Includes a categorized list of recommended Emoji."
   gem.authors       = ["Jan Lelis"]
-  gem.email         = ["mail@janlelis.de"]
+  gem.email         = ["hi@ruby.consulting"]
   gem.homepage      = "https://github.com/janlelis/unicode-emoji"
   gem.license       = "MIT"
 
