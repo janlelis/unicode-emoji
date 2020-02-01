@@ -93,6 +93,11 @@ describe Unicode::Emoji do
       "🧑‍🦱 person: curly hair" =~ Unicode::Emoji::REGEX
       assert_equal "🧑‍🦱", $&
     end
+
+    it "matches 13.0 emoji" do
+      "👨‍🍼 man feeding baby" =~ Unicode::Emoji::REGEX
+      assert_equal "👨‍🍼", $&
+    end
   end
 
   describe "REGEX_VALID" do

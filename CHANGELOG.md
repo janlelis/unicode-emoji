@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.4.0 (unreleased)
+
+- Emoji 13.0
+
 ### 2.3.1
 
 - Fix index to actually include Emoji 12.1

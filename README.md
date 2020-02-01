@@ -4,11 +4,11 @@ A small Ruby library which provides Unicode Emoji data and regexes, incorporatin
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **12.1** (October 2019)
+Emoji version: **13.0** (January 2019)
 
 CLDR version (used for sub-region flags): **36** (October 2019)
 
-Supported Rubies: **2.7**,  **2.6**, **2.5**, **2.4**
+Supported Rubies: **2.7**, **2.6**, **2.5**, **2.4**
 
 No longer supported Rubies, but might still work: **2.3**
 
@@ -131,7 +131,7 @@ A list of all Emoji can be found at [character.construction](https://character.c
 
 ### Properties
 
-Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://unicode.org/Public/emoji/12.1/emoji-data.txt) file:
+Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://www.unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt) file:
 
 ```ruby
 require "unicode/emoji"
