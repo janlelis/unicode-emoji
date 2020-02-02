@@ -1,6 +1,6 @@
 # Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[travis]](https://travis-ci.org/janlelis/unicode-emoji.svg)](https://travis-ci.org/janlelis/unicode-emoji)
 
-A small Ruby library which provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards.
+Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards.
 
 Also includes a categorized list of recommended Emoji.
 
