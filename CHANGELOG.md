@@ -1,6 +1,10 @@
 ## CHANGELOG
 
-### 2.4.0 (unreleased)
+### master (unreleased)
+
+- Use native Emoji regex properties when current Ruby's Emoji support is the same as our current Emoji version
+
+### 2.4.0
 
 - Emoji 13.0
 

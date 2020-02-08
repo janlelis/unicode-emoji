@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "unicode/version"
+
 require_relative "emoji/constants"
 require_relative "emoji/index"
 
@@ -47,7 +49,7 @@ module Unicode
     join = -> (*strings){ "(?:" + strings.join("|") + ")" }
     pack_and_join = ->(ords){  join[*ords.map{ |ord| pack[ord] }] }
 
-    if ENABLE_NATIVE_EMOJI_UNICODE_PROPERTIES
+    if EMOJI_VERSION == Unicode::Version.emoji_version
       emoji_character     = "\\p{Emoji}"
       emoji_modifier      = "\\p{Emoji Modifier}"
       emoji_modifier_base = "\\p{Emoji Modifier Base}"
