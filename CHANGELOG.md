@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### 2.5.0 (unreleased)
+### 2.5.0
 
 - Use native Emoji regex properties when current Ruby's Emoji support is the same as our current Emoji version
 - Update valid subdivisions to CLDR 37
