@@ -98,6 +98,11 @@ describe Unicode::Emoji do
       "👨‍🍼 man feeding baby" =~ Unicode::Emoji::REGEX
       assert_equal "👨‍🍼", $&
     end
+
+    it "matches 13.1 emoji" do
+      "❤️‍🔥 heart on fire" =~ Unicode::Emoji::REGEX
+      assert_equal "❤️‍🔥", $&
+    end
   end
 
   describe "REGEX_VALID" do
