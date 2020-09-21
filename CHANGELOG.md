@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### Next
+### 2.6.0
 
 - Emoji 13.1
 
