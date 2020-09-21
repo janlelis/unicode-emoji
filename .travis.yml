@@ -16,5 +16,4 @@ matrix:
     - rvm: 2.4
     - rvm: 2.3
     - rvm: ruby-head
-    - rvm: truffleruby-20.2.0
 #   fast_finish: true

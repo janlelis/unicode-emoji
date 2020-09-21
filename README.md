@@ -8,7 +8,7 @@ Emoji version: **13.1** (September 2020)
 
 CLDR version (used for sub-region flags): **37** (April 2020)
 
-Supported Rubies: **2.7**, **2.6**, **2.5**
+Supported Rubies: **2.7**, **2.6**, **2.5** (also latest JRuby and TruffleRuby stable)
 
 No longer supported Rubies, but might still work: **2.4**, **2.3**
 
