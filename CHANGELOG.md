@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### 2.7.0 (unreleased)
+### 2.7.0
 
 - Update valid subdivisions to CLDR 38
 - Loosen Ruby dependency to allow Ruby 3.0
