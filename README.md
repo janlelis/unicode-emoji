@@ -6,7 +6,7 @@ Also includes a categorized list of recommended Emoji.
 
 Emoji version: **13.1** (September 2020)
 
-CLDR version (used for sub-region flags): **37** (April 2020)
+CLDR version (used for sub-region flags): **38** (October 2020)
 
 Supported Rubies: **2.7**, **2.6**, **2.5** (also latest JRuby and TruffleRuby stable)
 
