@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.8.0 (unreleased)
+
+- Update valid subdivisions to CLDR 38.1
+
 ### 2.7.0
 
 - Update valid subdivisions to CLDR 38
