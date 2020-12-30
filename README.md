@@ -1,4 +1,4 @@
-# Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[ci]](https://github.com/janlelis/unicode-display_width/workflows/Test/badge.svg)](https://github.com/janlelis/unicode-display_width/actions?query=workflow%3ATest)
+# Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[ci]](https://github.com/janlelis/unicode-emoji/workflows/Test/badge.svg)](https://github.com/janlelis/unicode-emoji/actions?query=workflow%3ATest)
 
 Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards.
 
