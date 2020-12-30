@@ -32,6 +32,6 @@ end
 
 desc "#{gemspec.name} | Spec"
 task :spec do
-  sh "for file in spec/*.rb; do ruby $file; done"
+  ruby "spec/unicode_emoji_spec.rb"
 end
 task default: :spec

@@ -1,4 +1,4 @@
-# Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[travis]](https://travis-ci.org/janlelis/unicode-emoji.svg)](https://travis-ci.org/janlelis/unicode-emoji)
+# Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[ci]](https://github.com/janlelis/unicode-display_width/workflows/Test/badge.svg)](https://github.com/janlelis/unicode-display_width/actions?query=workflow%3ATest)
 
 Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards.
 
@@ -8,7 +8,7 @@ Emoji version: **13.1** (September 2020)
 
 CLDR version (used for sub-region flags): **38.1** (December 2020)
 
-Supported Rubies: **2.7**, **2.6**, **2.5** (also latest JRuby and TruffleRuby stable)
+Supported Rubies: **3.0**, **2.7**, **2.6**, **2.5** (also latest JRuby and TruffleRuby stable)
 
 No longer supported Rubies, but might still work: **2.4**, **2.3**
 
