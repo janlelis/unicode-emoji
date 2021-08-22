@@ -8,9 +8,9 @@ Emoji version: **13.1** (September 2020)
 
 CLDR version (used for sub-region flags): **39** (April 2021)
 
-Supported Rubies: **3.0**, **2.7**, **2.6**, **2.5** (also latest JRuby and TruffleRuby stable)
+Supported Rubies: **3.0**, **2.7**
 
-No longer supported Rubies, but might still work: **2.4**, **2.3**
+No longer supported Rubies, but might still work: **2.6**, **2.5**, **2.4**, **2.3**
 
 If you are stuck on an older Ruby version, checkout the latest [0.9 version](https://rubygems.org/gems/unicode-emoji/versions/0.9.3) of this gem.
 
