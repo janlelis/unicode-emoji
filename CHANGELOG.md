@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.9.0 (unreleased)
+
+- Emoji 14.0
+
 ### 2.8.0
 
 - Update valid subdivisions to CLDR 39
