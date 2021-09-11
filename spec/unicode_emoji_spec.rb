@@ -103,6 +103,11 @@ describe Unicode::Emoji do
       "❤️‍🔥 heart on fire" =~ Unicode::Emoji::REGEX
       assert_equal "❤️‍🔥", $&
     end
+
+    it "matches 14.0 emoji" do
+      "🪺 nest with eggs" =~ Unicode::Emoji::REGEX
+      assert_equal "🪺", $&
+    end
   end
 
   describe "REGEX_VALID" do
