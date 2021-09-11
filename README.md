@@ -60,7 +60,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 - If you want broader matching (e.g. more sub-regions), choose `REGEX_VALID`
 - If you even want to match for invalid sequences, too, use `REGEX_WELL_FORMED`
 
-Please see [the standard](http://www.unicode.org/reports/tr51/#Emoji_Sets) for details.
+Please see [the standard](https://www.unicode.org/reports/tr51/#Emoji_Sets) for details.
 
 Property | `REGEX` (RGI / Recommended) | `REGEX_VALID` (Valid) | `REGEX_WELL_FORMED` (Well-formed)
 ---------|-----------------------------|-----------------------|----------------------------------
@@ -72,7 +72,7 @@ Tag Sequence "😴󠁧󠁢󠁡󠁡󠁡󠁿"              | No  | No  | Yes
 ZWJ Sequence "🤾🏽‍♀️"           | Yes | Yes | Yes
 ZWJ Sequence "🤠‍🤢"            | No  | Yes | Yes
 
-More info about valid vs. recommended Emoji in this [blog article on Emojipedia](http://blog.emojipedia.org/unicode-behind-the-curtain/).
+More info about valid vs. recommended Emoji in this [blog article on Emojipedia](https://blog.emojipedia.org/unicode-behind-the-curtain/).
 
 #### Singleton Regexes
 
