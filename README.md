@@ -4,7 +4,7 @@ Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Em
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **13.1** (September 2020)
+Emoji version: **14.0** (September 2021)
 
 CLDR version (used for sub-region flags): **39** (April 2021)
 
