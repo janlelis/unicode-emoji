@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### 2.9.0 (unreleased)
+### 2.9.0
 
 - Emoji 14.0
 
