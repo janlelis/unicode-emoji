@@ -25,6 +25,22 @@ def write_regex(const_name, regex, dirpath)
   puts "#{const_name} written to #{filepath}"
 end
 
+# Converts [1, 2, 3, 5, 6, 20, 21, 22, 23, 100] (it does not need to be sorted) to [[1, 2, 3], [5, 6], [20, 21, 22, 23], [100]]
+def groupify(arr)
+  arr = arr.sort
+  prev = nil
+  arr.slice_before do |el|
+    (prev.nil? || el != prev + 1).tap { prev = el }
+  end
+end
+
+# Converts [1, 2, 3, 5, 6, 20, 21, 22, 23, 100] (it does not need to be sorted) to [1..3, 5, 6, 20..23, 100]
+def rangify(arr)
+  groupify(arr).map do |group|
+    group.size < 3 ? group : Range.new(group.first, group.last)
+  end.flatten
+end
+
 def pack(ord)
   Regexp.escape(Array(ord).pack("U*"))
 end
@@ -33,8 +49,18 @@ def join(*strings)
   "(?:" + strings.join("|") + ")"
 end
 
+def character_class(range)
+  "[" + pack(range.first) + "-" + pack(range.last) + "]"
+end
+
 def pack_and_join(ords)
-  join(*ords.map{ |ord| pack(ord) })
+  if ords.any? { |e| e.is_a?(Array) }
+    join(*ords.map { |ord| pack(ord) })
+  else
+    join(rangify(ords).map do |el|
+      el.is_a?(Range) ? character_class(el) : pack(el)
+    end)
+  end
 end
 
 def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_component:, emoji_presentation:, picto:, picto_no_emoji:)
