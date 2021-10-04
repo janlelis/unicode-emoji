@@ -49,17 +49,20 @@ def join(*strings)
   "(?:" + strings.join("|") + ")"
 end
 
-def character_class(range)
-  "[" + pack(range.first) + "-" + pack(range.last) + "]"
+def character_class(ords_with_ranges)
+  "[" + ords_with_ranges.map{ |ord_or_range|
+      ord_or_range.is_a?(Range) ?
+        pack(ord_or_range.first) + "-" + pack(ord_or_range.last) :
+        pack(ord_or_range)
+    }.join +
+  "]"
 end
 
 def pack_and_join(ords)
   if ords.any? { |e| e.is_a?(Array) }
     join(*ords.map { |ord| pack(ord) })
   else
-    join(rangify(ords).map do |el|
-      el.is_a?(Range) ? character_class(el) : pack(el)
-    end)
+    character_class(rangify(ords))
   end
 end
 
