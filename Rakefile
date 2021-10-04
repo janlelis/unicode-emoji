@@ -35,3 +35,8 @@ task :spec do
   ruby "spec/unicode_emoji_spec.rb"
 end
 task default: :spec
+
+desc "#{gemspec.name} | Generates all regex constants and saves them to lib/unicode/emoji/{generated,generated_native} directories"
+task :generate_constants do
+  load "data/generate_constants.rb", true
+end
