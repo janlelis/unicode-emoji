@@ -1,4 +1,12 @@
-## CHANGELOG
+# CHANGELOG
+
+### 3.0.0 (unreleased)
+
+- Vastly improve memory usage, patch by @radarek
+  - Emoji regexes are now pre-generated and bundled with the release
+  - Regexes use character classes instead of unions when possible
+  - Most constants (e.g. regexes) now get autoloaded
+  - See https://github.com/janlelis/unicode-emoji/pull/9 for more details
 
 ### 2.9.0
 
