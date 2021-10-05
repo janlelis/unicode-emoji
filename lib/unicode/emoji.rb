@@ -3,212 +3,30 @@
 require "unicode/version"
 
 require_relative "emoji/constants"
-require_relative "emoji/index"
 
 module Unicode
   module Emoji
-    PROPERTY_NAMES = {
-      E: "Emoji",
-      B: "Emoji_Modifier_Base",
-      M: "Emoji_Modifier",
-      C: "Emoji_Component",
-      P: "Emoji_Presentation",
-      X: "Extended_Pictographic",
-    }
+    autoload :INDEX, File.expand_path('emoji/index', __dir__)
 
-    EMOJI_VARIATION_SELECTOR      = 0xFE0F
-    TEXT_VARIATION_SELECTOR       = 0xFE0E
-    EMOJI_TAG_BASE_FLAG           = 0x1F3F4
-    CANCEL_TAG                    = 0xE007F
-    TAGS                          = [*0xE0020..0xE007E]
-    EMOJI_KEYCAP_SUFFIX           = 0x20E3
-    ZWJ                           = 0x200D
-    REGIONAL_INDICATORS           = [*0x1F1E6..0x1F1FF]
-
-    EMOJI_CHAR                    = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:E) }.keys.freeze
-    EMOJI_PRESENTATION            = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:P) }.keys.freeze
-    TEXT_PRESENTATION             = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:E) && !props.include?(:P) }.keys.freeze
-    EMOJI_COMPONENT               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:C) }.keys.freeze
-    EMOJI_MODIFIER_BASES          = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:B) }.keys.freeze
-    EMOJI_MODIFIERS               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:M) }.keys.freeze
-
-    EXTENDED_PICTOGRAPHIC         = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) }.keys.freeze
-    EXTENDED_PICTOGRAPHIC_NO_EMOJI= INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) && !props.include?(:E) }.keys.freeze
-    EMOJI_KEYCAPS                 = INDEX[:KEYCAPS].freeze
-    VALID_REGION_FLAGS            = INDEX[:FLAGS].freeze
-    VALID_SUBDIVISIONS            = INDEX[:SD].freeze
-    RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
-    RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
-
-    LIST                          = INDEX[:LIST].freeze.each_value(&:freeze)
-    LIST_REMOVED_KEYS             = [
-      "Smileys & People",
-    ]
-
-    pack = ->(ord){ Regexp.escape(Array(ord).pack("U*")) }
-    join = -> (*strings){ "(?:" + strings.join("|") + ")" }
-    pack_and_join = ->(ords){  join[*ords.map{ |ord| pack[ord] }] }
-
-    if EMOJI_VERSION == Unicode::Version.emoji_version
-      emoji_character     = "\\p{Emoji}"
-      emoji_modifier      = "\\p{Emoji Modifier}"
-      emoji_modifier_base = "\\p{Emoji Modifier Base}"
-      emoji_component     = "\\p{Emoji Component}"
-      emoji_presentation  = "\\p{Emoji Presentation}"
-      picto               = "\\p{Extended Pictographic}"
-      picto_no_emoji      = "\\p{Extended Pictographic}(?<!\\p{Emoji})"
-    else
-      emoji_character     = pack_and_join[EMOJI_CHAR]
-      emoji_modifier      = pack_and_join[EMOJI_MODIFIERS]
-      emoji_modifier_base = pack_and_join[EMOJI_MODIFIER_BASES]
-      emoji_component     = pack_and_join[EMOJI_COMPONENT]
-      emoji_presentation  = pack_and_join[EMOJI_PRESENTATION]
-      picto               = pack_and_join[EXTENDED_PICTOGRAPHIC]
-      picto_no_emoji      = pack_and_join[EXTENDED_PICTOGRAPHIC_NO_EMOJI]
+    %w[
+      EMOJI_CHAR EMOJI_CHAR EMOJI_PRESENTATION TEXT_PRESENTATION EMOJI_COMPONENT EMOJI_MODIFIER_BASES
+      EMOJI_MODIFIERS EXTENDED_PICTOGRAPHIC EXTENDED_PICTOGRAPHIC_NO_EMOJI EMOJI_KEYCAPS VALID_REGION_FLAGS
+      VALID_SUBDIVISIONS RECOMMENDED_SUBDIVISION_FLAGS RECOMMENDED_ZWJ_SEQUENCES LIST LIST_REMOVED_KEYS
+    ].each do |const_name|
+      autoload const_name, File.expand_path('emoji/lazy_constants', __dir__)
     end
 
-    emoji_presentation_sequence = \
-      join[
-        pack_and_join[TEXT_PRESENTATION] + pack[EMOJI_VARIATION_SELECTOR],
-        emoji_presentation + "(?!" + pack[TEXT_VARIATION_SELECTOR] + ")" + pack[EMOJI_VARIATION_SELECTOR] + "?",
-      ]
-
-    non_component_emoji_presentation_sequence = \
-      "(?!" + emoji_component + ")" + emoji_presentation_sequence
-
-    text_presentation_sequence = \
-      join[
-        pack_and_join[TEXT_PRESENTATION]+ "(?!" + join[emoji_modifier, pack[EMOJI_VARIATION_SELECTOR]] + ")" + pack[TEXT_VARIATION_SELECTOR] + "?",
-        emoji_presentation + pack[TEXT_VARIATION_SELECTOR]
-      ]
-
-    emoji_modifier_sequence = \
-      emoji_modifier_base + emoji_modifier
-
-    emoji_keycap_sequence = \
-      pack_and_join[EMOJI_KEYCAPS] + pack[[EMOJI_VARIATION_SELECTOR, EMOJI_KEYCAP_SUFFIX]]
-
-    emoji_valid_flag_sequence = \
-      pack_and_join[VALID_REGION_FLAGS]
-
-    emoji_well_formed_flag_sequence = \
-      "(?:" +
-        pack_and_join[REGIONAL_INDICATORS] +
-        pack_and_join[REGIONAL_INDICATORS] +
-      ")"
-
-    emoji_valid_core_sequence = \
-      join[
-        # emoji_character,
-        emoji_keycap_sequence,
-        emoji_modifier_sequence,
-        non_component_emoji_presentation_sequence,
-        emoji_valid_flag_sequence,
-      ]
-
-    emoji_well_formed_core_sequence = \
-      join[
-        # emoji_character,
-        emoji_keycap_sequence,
-        emoji_modifier_sequence,
-        non_component_emoji_presentation_sequence,
-        emoji_well_formed_flag_sequence,
-      ]
-
-    emoji_rgi_tag_sequence = \
-      pack_and_join[RECOMMENDED_SUBDIVISION_FLAGS]
-
-    emoji_valid_tag_sequence = \
-      "(?:" +
-        pack[EMOJI_TAG_BASE_FLAG] +
-        "(?:" + VALID_SUBDIVISIONS.map{ |sd| Regexp.escape(sd.tr("\u{20}-\u{7E}", "\u{E0020}-\u{E007E}"))}.join("|") + ")" +
-        pack[CANCEL_TAG] +
-      ")"
-
-    emoji_well_formed_tag_sequence = \
-      "(?:" +
-        join[
-          non_component_emoji_presentation_sequence,
-          emoji_modifier_sequence,
-        ] +
-        pack_and_join[TAGS] + "+" +
-        pack[CANCEL_TAG] +
-      ")"
-
-    emoji_rgi_zwj_sequence = \
-      pack_and_join[RECOMMENDED_ZWJ_SEQUENCES]
-
-    emoji_valid_zwj_element = \
-      join[
-        emoji_modifier_sequence,
-        emoji_presentation_sequence,
-        emoji_character,
-      ]
-
-    emoji_valid_zwj_sequence = \
-      "(?:" +
-        "(?:" + emoji_valid_zwj_element + pack[ZWJ] + ")+" + emoji_valid_zwj_element +
-      ")"
-
-    emoji_rgi_sequence = \
-      join[
-        emoji_rgi_zwj_sequence,
-        emoji_rgi_tag_sequence,
-        emoji_valid_core_sequence,
-      ]
-
-    emoji_valid_sequence = \
-      join[
-        emoji_valid_zwj_sequence,
-        emoji_valid_tag_sequence,
-        emoji_valid_core_sequence,
-      ]
-
-    emoji_well_formed_sequence = \
-      join[
-        emoji_valid_zwj_sequence,
-        emoji_well_formed_tag_sequence,
-        emoji_well_formed_core_sequence,
-      ]
-
-    # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
-    REGEX = Regexp.compile(emoji_rgi_sequence)
-
-    # Matches basic singleton emoji and all kind of valid sequences
-    REGEX_VALID = Regexp.compile(emoji_valid_sequence)
-
-    # Matches basic singleton emoji and all kind of sequences
-    REGEX_WELL_FORMED = Regexp.compile(emoji_well_formed_sequence)
-
-    # Matches only basic single, non-textual emoji
-    # Ignores "components" like modifiers or simple digits
-    REGEX_BASIC = Regexp.compile(
-      "(?!" + emoji_component + ")" + emoji_presentation_sequence
+    generated_constants_dirpath = File.expand_path(
+      EMOJI_VERSION == Unicode::Version.emoji_version ? "emoji/generated_native/" : "emoji/generated/",
+      __dir__
     )
 
-    # Matches only basic single, textual emoji
-    # Ignores "components" like modifiers or simple digits
-    REGEX_TEXT = Regexp.compile(
-      "(?!" + emoji_component + ")" + text_presentation_sequence
-    )
-
-    # Matches any emoji-related codepoint - Use with caution (returns partil matches)
-    REGEX_ANY = Regexp.compile(
-      emoji_character
-    )
-
-    # Combined REGEXes which also match for TEXTUAL emoji
-    REGEX_INCLUDE_TEXT = Regexp.union(REGEX, REGEX_TEXT)
-    REGEX_VALID_INCLUDE_TEXT = Regexp.union(REGEX_VALID, REGEX_TEXT)
-    REGEX_WELL_FORMED_INCLUDE_TEXT = Regexp.union(REGEX_WELL_FORMED, REGEX_TEXT)
-
-    REGEX_PICTO = Regexp.compile(
-      picto
-    )
-
-    REGEX_PICTO_NO_EMOJI = Regexp.compile(
-      picto_no_emoji
-    )
+    %w[
+      REGEX REGEX_VALID REGEX_WELL_FORMED REGEX_BASIC REGEX_TEXT REGEX_ANY REGEX_INCLUDE_TEXT
+      REGEX_VALID_INCLUDE_TEXT REGEX_WELL_FORMED_INCLUDE_TEXT REGEX_PICTO REGEX_PICTO_NO_EMOJI
+    ].each do |const_name|
+      autoload const_name, File.join(generated_constants_dirpath, const_name.downcase)
+    end
 
     def self.properties(char)
       ord = get_codepoint_value(char)
