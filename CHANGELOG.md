@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 3.0.0 (unreleased)
+### 3.0.0
 
 - Vastly improve memory usage, patch by @radarek
   - Emoji regexes are now pre-generated and bundled with the release
