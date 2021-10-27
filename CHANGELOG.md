@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.1.0 (unreleased)
+
+- Update valid subdivisions to CLDR 40
+
 ### 3.0.0
 
 - Vastly improve memory usage, patch by @radarek
