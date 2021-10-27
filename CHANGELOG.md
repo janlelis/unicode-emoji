@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 3.1.0 (unreleased)
+### 3.1.0
 
 - Update valid subdivisions to CLDR 40
 
