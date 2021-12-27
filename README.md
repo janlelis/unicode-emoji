@@ -8,7 +8,7 @@ Emoji version: **14.0** (September 2021)
 
 CLDR version (used for sub-region flags): **40** (October 2021)
 
-Supported Rubies: **3.0**, **2.7**
+Supported Rubies: **3.1**, **3.0**, **2.7**
 
 No longer supported Rubies, but might still work: **2.6**, **2.5**, **2.4**, **2.3**
 
