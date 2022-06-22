@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 3.1.1 (unreleased)
+
+- Fix `REGEX` to be able to match complete family emoji, instead of
+  sub-matching partial families, thanks @matt17r
+
 ### 3.1.0
 
 - Update valid subdivisions to CLDR 40

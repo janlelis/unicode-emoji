@@ -117,13 +117,16 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_well_formed_flag_sequence,
     )
 
+  # Sort to make sure complex sequences match first
   emoji_rgi_tag_sequence = \
-    pack_and_join(RECOMMENDED_SUBDIVISION_FLAGS)
+    pack_and_join(RECOMMENDED_SUBDIVISION_FLAGS.sort_by(&:length).reverse)
 
   emoji_valid_tag_sequence = \
     "(?:" +
       pack(EMOJI_TAG_BASE_FLAG) +
-      "(?:" + VALID_SUBDIVISIONS.map{ |sd| Regexp.escape(sd.tr("\u{20}-\u{7E}", "\u{E0020}-\u{E007E}"))}.join("|") + ")" +
+      "(?:" + VALID_SUBDIVISIONS.sort_by(&:length).reverse.map{ |sd|
+        Regexp.escape(sd.tr("\u{20}-\u{7E}", "\u{E0020}-\u{E007E}"))
+      }.join("|") + ")" +
       pack(CANCEL_TAG) +
     ")"
 
@@ -137,8 +140,9 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       pack(CANCEL_TAG) +
     ")"
 
+  # Sort to make sure complex sequences match first
   emoji_rgi_zwj_sequence = \
-    pack_and_join(RECOMMENDED_ZWJ_SEQUENCES)
+    pack_and_join(RECOMMENDED_ZWJ_SEQUENCES.sort_by(&:length).reverse)
 
   emoji_valid_zwj_element = \
     join(

@@ -108,6 +108,13 @@ describe Unicode::Emoji do
       "🪺 nest with eggs" =~ Unicode::Emoji::REGEX
       assert_equal "🪺", $&
     end
+
+    # See gh#12 and https://github.com/matt17r/nw5k/commit/05a34d3c9211a23e5ae6853bb19fd2f224779ef4#diff-afb6f8bc3bae71b75743e00882a060863e2430cbe858ec9014e5956504dfc61cR2
+    it "matches family emoji correctly" do
+      ["👨‍👩‍👧‍👦", "👨‍👩‍👦‍👦", "👨‍👩‍👧‍👧", "👨‍👨‍👧‍👦", "👨‍👨‍👦‍👦", "👨‍👨‍👧‍👧", "👩‍👩‍👧‍👦", "👩‍👩‍👦‍👦", "👩‍👩‍👧‍👧", "👨‍👦‍👦", "👨‍👧‍👦", "👨‍👧‍👧", "👩‍👦‍👦", "👩‍👧‍👦", "👩‍👧‍👧"].each { |family|
+        assert_equal family, family[Unicode::Emoji::REGEX]
+      }
+    end
   end
 
   describe "REGEX_VALID" do
