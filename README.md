@@ -6,7 +6,7 @@ Also includes a categorized list of recommended Emoji.
 
 Emoji version: **14.0** (September 2021)
 
-CLDR version (used for sub-region flags): **40** (October 2021)
+CLDR version (used for sub-region flags): **41** (April 2022)
 
 Supported Rubies: **3.1**, **3.0**, **2.7**
 

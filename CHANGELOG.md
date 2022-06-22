@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.2.0
+
+- Update valid subdivisions to CLDR 41
+
 ### 3.1.1
 
 - Fix `REGEX` to be able to match complete family emoji, instead of
