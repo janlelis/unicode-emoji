@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 3.1.1 (unreleased)
+### 3.1.1
 
 - Fix `REGEX` to be able to match complete family emoji, instead of
   sub-matching partial families, thanks @matt17r
