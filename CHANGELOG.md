@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.3.1
+
+- Update valid subdivisions to CLDR 42 (no changes)
+
 ### 3.3.0
 
 - Emoji 15.0
