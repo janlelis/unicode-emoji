@@ -1,8 +1,8 @@
 # CHANGELOG
 
-### 3.3.2 (unreleased)
+### 3.3.2
 
-- Update valid subdivisions to CLDR 43
+- Update valid subdivisions to CLDR 43 (no changes)
 
 ### 3.3.1
 
