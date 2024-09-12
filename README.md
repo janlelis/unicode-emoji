@@ -4,11 +4,11 @@ Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Em
 
 Also includes a categorized list of recommended Emoji.
 
-Emoji version: **15.1** (September 2023)
+Emoji version: **16.0** (September 2024)
 
-CLDR version (used for sub-region flags): **43** (April 2023)
+CLDR version (used for sub-region flags): **45** (April 2024)
 
-Supported Rubies: **3.3**, **3.2**, **3.1**, **3.0**
+Supported Rubies: **3.x**
 
 No longer supported Rubies, but might still work: **2.7**, **2.6**, **2.5**, **2.4**, **2.3**
 

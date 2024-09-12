@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.5.0
+
+- Emoji 16.0
+
 ### 3.4.0
 
 - Emoji 15.1
@@ -7,6 +11,7 @@
 ### 3.3.2
 
 - Update valid subdivisions to CLDR 43 (no changes)
+  -> there won't be any new subdivision flags in Emoji
 
 ### 3.3.1
 
