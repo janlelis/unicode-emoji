@@ -148,5 +148,5 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 
 ## MIT
 
-- Copyright (C) 2017-2023 Jan Lelis <https://janlelis.com>. Released under the MIT license.
+- Copyright (C) 2017-2024 Jan Lelis <https://janlelis.com>. Released under the MIT license.
 - Unicode data: https://www.unicode.org/copyright.html#Exhibit1
