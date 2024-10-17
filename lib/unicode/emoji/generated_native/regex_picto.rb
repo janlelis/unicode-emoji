@@ -3,6 +3,6 @@
 
 module Unicode
   module Emoji
-    REGEX_PICTO = /\p{Extended Pictographic}/
+    REGEX_PICTO = /\p{ExtPict}/
   end
 end
