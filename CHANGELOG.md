@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.6.0 (unreleased)
+
+- `Unicode::Emoji::REGEX_TEXT` now matches non-emoji keycaps like "3⃣"  (U+0033 U+20E3)
+
 ### 3.5.0
 
 - Emoji 16.0

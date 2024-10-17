@@ -69,6 +69,14 @@ describe Unicode::Emoji do
       assert_equal "2️⃣", $&
     end
 
+    it "does not match non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX
+      assert_nil $&
+
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX
+      assert_nil $&
+    end
+  
     it "matches recommended tag sequences" do
       "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX
       assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
@@ -190,6 +198,14 @@ describe Unicode::Emoji do
       assert_equal "2️⃣", $&
     end
 
+    it "does not match non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX_VALID
+      assert_nil $&
+
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX_VALID
+      assert_nil $&
+    end
+
     it "matches recommended tag sequences" do
       "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
@@ -270,6 +286,14 @@ describe Unicode::Emoji do
     it "matches emoji keycap sequences" do
       "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_equal "2️⃣", $&
+    end
+
+    it "does not match non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
+
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
     end
 
     it "matches recommended tag sequences" do
@@ -404,6 +428,14 @@ describe Unicode::Emoji do
     it "does not match emoji keycap sequences" do
       "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_TEXT
       assert_nil $&
+    end
+
+    it "matches non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX_TEXT
+      assert_equal "8⃣", $&
+      
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX_TEXT
+      assert_equal "#⃣", $&
     end
 
     it "does not match tag sequences" do

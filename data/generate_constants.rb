@@ -78,10 +78,13 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   non_component_emoji_presentation_sequence = \
     "(?!" + emoji_component + ")" + emoji_presentation_sequence
 
+  text_keycap_sequence = \
+    join(EMOJI_KEYCAPS.map{|keycap| pack([keycap, EMOJI_KEYCAP_SUFFIX]) })
+
   text_presentation_sequence = \
     join(
       pack_and_join(TEXT_PRESENTATION)+ "(?!" + join(emoji_modifier, pack(EMOJI_VARIATION_SELECTOR)) + ")" + pack(TEXT_VARIATION_SELECTOR) + "?",
-      emoji_presentation + pack(TEXT_VARIATION_SELECTOR)
+      emoji_presentation + pack(TEXT_VARIATION_SELECTOR),
     )
 
   emoji_modifier_sequence = \
@@ -197,7 +200,10 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Matches only basic single, textual emoji
   # Ignores "components" like modifiers or simple digits
   regexes[:REGEX_TEXT] = Regexp.compile(
-    "(?!" + emoji_component + ")" + text_presentation_sequence
+    join(
+      "(?!" + emoji_component + ")" + text_presentation_sequence,
+      text_keycap_sequence,
+    )
   )
 
   # Matches any emoji-related codepoint - Use with caution (returns partil matches)
