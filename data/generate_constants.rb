@@ -125,7 +125,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     "(?:" +
       pack(EMOJI_TAG_BASE_FLAG) +
       "(?:" + VALID_SUBDIVISIONS.sort_by(&:length).reverse.map{ |sd|
-        Regexp.escape(sd.tr("\u{20}-\u{7E}", "\u{E0020}-\u{E007E}"))
+        sd.tr("\u{30}-\u{39}\u{61}-\u{7A}", "\u{E0030}-\u{E0039}\u{E0061}-\u{E007A}")
       }.join("|") + ")" +
       pack(CANCEL_TAG) +
     ")"

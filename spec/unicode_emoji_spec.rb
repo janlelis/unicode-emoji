@@ -216,6 +216,11 @@ describe Unicode::Emoji do
       assert_equal "🏴󠁧󠁢󠁡󠁧󠁢󠁿", $&
     end
 
+    it "matches valid tag sequences (compressed one)" do
+      "🏴󠁬󠁶󠀰󠀴󠀲󠁿 lv042" =~ Unicode::Emoji::REGEX_VALID
+      assert_equal "🏴󠁬󠁶󠀰󠀴󠀲󠁿", $&
+    end
+
     it "does not match invalid tag sequences" do
       "🏴󠁧󠁢󠁡󠁡󠁡󠁿 GB AAA" =~ Unicode::Emoji::REGEX_VALID
       assert_equal "🏴", $& # only base flag is matched

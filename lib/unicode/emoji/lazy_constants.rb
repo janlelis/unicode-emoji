@@ -13,7 +13,7 @@ module Unicode
     EXTENDED_PICTOGRAPHIC_NO_EMOJI= INDEX[:PROPERTIES].select{ |ord, props| props.include?(:X) && !props.include?(:E) }.keys.freeze
     EMOJI_KEYCAPS                 = INDEX[:KEYCAPS].freeze
     VALID_REGION_FLAGS            = INDEX[:FLAGS].freeze
-    VALID_SUBDIVISIONS            = INDEX[:SD].freeze
+    VALID_SUBDIVISIONS            = INDEX[:SD].map{_1.sub(/(.)~(.)/, '[\1-\2]') }
     RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
     RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
 
@@ -21,5 +21,8 @@ module Unicode
     LIST_REMOVED_KEYS             = [
       "Smileys & People",
     ].freeze
+
+
+
   end
 end
