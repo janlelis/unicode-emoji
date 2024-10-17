@@ -127,11 +127,11 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 
 Please note that categories might change with future versions of the Emoji standard. This gem will issue warnings when attempting to retrieve old categories using the `#list` method.
 
-A list of all Emoji can be found at [character.construction](https://character.construction).
+A list of all Emoji (generated from this gem) can be found at [character.construction/emoji](https://character.construction/emoji).
 
 ### Properties
 
-Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://www.unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt) file:
+Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt) file:
 
 ```ruby
 require "unicode/emoji"
@@ -143,7 +143,7 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 
 - [Unicode® Technical Standard #51](https://www.unicode.org/reports/tr51/)
 - [Emoji categories](https://unicode.org/emoji/charts/emoji-ordering.html)
-- Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name) (here [as website](https://character.construction/name))
+- Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name) ([as website](https://character.construction/name))
 - Part of [unicode-x](https://github.com/janlelis/unicode-x)
 
 ## MIT
