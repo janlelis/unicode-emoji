@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.7.0 (unereleased)
+
+- Be stricter about selection of tag characters in REGEX_WELL_FORMED
+  - Only U+E0030..U+E0039, U+E0061..U+E007A allowed
+  - Max tag sequence length
+
 ### 3.6.0
 
 - `Unicode::Emoji::REGEX_TEXT` now matches non-emoji keycaps like "3⃣"  (U+0033 U+20E3)

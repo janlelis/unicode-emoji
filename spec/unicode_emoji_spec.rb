@@ -311,6 +311,16 @@ describe Unicode::Emoji do
       assert_equal "😴󠁧󠁢󠁡󠁡󠁡󠁿", $&
     end
 
+    it "does not match too long tag sequences (only black flag is matched)" do
+      "🏴󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁿 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🏴", $&
+    end
+
+    it "does not match too long tag sequences (only black flag is matched)" do
+      "🏴󠀤󠁿 $" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🏴", $&
+    end
+
     it "matches recommended zwj sequences" do
       "🤾🏽‍♀️ woman playing handball: medium skin tone" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_equal "🤾🏽‍♀️", $&

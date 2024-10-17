@@ -21,7 +21,7 @@ module Unicode
     TEXT_VARIATION_SELECTOR       = 0xFE0E
     EMOJI_TAG_BASE_FLAG           = 0x1F3F4
     CANCEL_TAG                    = 0xE007F
-    TAGS                          = [*0xE0020..0xE007E].freeze
+    SPEC_TAGS                     = [*0xE0030..0xE0039, *0xE0061..0xE007A].freeze
     EMOJI_KEYCAP_SUFFIX           = 0x20E3
     ZWJ                           = 0x200D
     REGIONAL_INDICATORS           = [*0x1F1E6..0x1F1FF].freeze

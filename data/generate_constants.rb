@@ -139,7 +139,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
         non_component_emoji_presentation_sequence,
         emoji_modifier_sequence,
       ) +
-      pack_and_join(TAGS) + "+" +
+      pack_and_join(SPEC_TAGS) + "{1,30}" +
       pack(CANCEL_TAG) +
     ")"
 
