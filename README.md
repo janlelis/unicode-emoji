@@ -48,29 +48,31 @@ Matches (non-textual) Emoji of all kinds:
 
 Regex                         | Description | Example Matches | Example Non-Matches
 ------------------------------|-------------|-----------------|--------------------
-`Unicode::Emoji::REGEX`       | **Use this if unsure!** Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kind of *recommended* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🤾🏽‍♀️` | `😴︎`, `▶`, `🏻`, `🇵🇵`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤠‍🤢`
-`Unicode::Emoji::REGEX_VALID` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kind of *valid* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢` | `😴︎`, `▶`, `🏻`, `🇵🇵`
-`Unicode::Emoji::REGEX_WELL_FORMED` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kind of *well-formed* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵` | `😴︎`, `▶`, `🏻`
+`Unicode::Emoji::REGEX`       | **Use this if unsure!** Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kinds of *recommended* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🤾🏽‍♀️` | `😴︎`, `▶`, `🏻`, `🇵🇵`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤠‍🤢`
+`Unicode::Emoji::REGEX_VALID` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kinds of *valid* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢` | `😴︎`, `▶`, `🏻`, `🇵🇵`
+`Unicode::Emoji::REGEX_WELL_FORMED` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kinds of *well-formed* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵` | `😴︎`, `▶`, `🏻`
+`Unicode::Emoji::REGEX_POSSIBLE` | Matches all singleton Emoji, singleton components, all kinds of Emoji sequences, and even single digits | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵`, `😴︎`, `▶`, `🏻`, `1` |
 
 ##### Picking the Right Emoji Regex
 
 - Usually you just want `REGEX` (RGI set)
 - If you want broader matching (e.g. more sub-regions), choose `REGEX_VALID`
 - If you even want to match for invalid sequences, too, use `REGEX_WELL_FORMED`
+- If you want a quick check for possible Emoji, which might contain false positives, use `REGEX_POSSIBLE` ([suggested in the Unicode Standard](https://www.unicode.org/reports/tr51/#EBNF_and_Regex))
+
+Property | `REGEX` (RGI / Recommended) | `REGEX_VALID` (Valid) | `REGEX_WELL_FORMED` (Well-formed) | `REGEX_POSSIBLE`
+---------|-----------------------------|-----------------------|-----------------------------------|-----------------
+Region "🇵🇹"                    | Yes | Yes | Yes | Yes
+Region "🇵🇵"                   | No  | No  | Yes | Yes
+Tag Sequence "🏴󠁧󠁢󠁳󠁣󠁴󠁿"              | Yes | Yes | Yes | Yes
+Tag Sequence "🏴󠁧󠁢󠁡󠁧󠁢󠁿"              | No  | Yes | Yes | Yes
+Tag Sequence "😴󠁧󠁢󠁡󠁡󠁡󠁿"              | No  | No  | Yes | Yes
+ZWJ Sequence "🤾🏽‍♀️"           | Yes | Yes | Yes | Yes
+ZWJ Sequence "🤠‍🤢"            | No  | Yes | Yes | Yes
 
 Please see [the standard](https://www.unicode.org/reports/tr51/#Emoji_Sets) for details.
 
-Property | `REGEX` (RGI / Recommended) | `REGEX_VALID` (Valid) | `REGEX_WELL_FORMED` (Well-formed)
----------|-----------------------------|-----------------------|----------------------------------
-Region "🇵🇹"                    | Yes | Yes | Yes
-Region "🇵🇵"                   | No  | No  | Yes
-Tag Sequence "🏴󠁧󠁢󠁳󠁣󠁴󠁿"              | Yes | Yes | Yes
-Tag Sequence "🏴󠁧󠁢󠁡󠁧󠁢󠁿"              | No  | Yes | Yes
-Tag Sequence "😴󠁧󠁢󠁡󠁡󠁡󠁿"              | No  | No  | Yes
-ZWJ Sequence "🤾🏽‍♀️"           | Yes | Yes | Yes
-ZWJ Sequence "🤠‍🤢"            | No  | Yes | Yes
-
-More info about valid vs. recommended Emoji in this [blog article on Emojipedia](https://blog.emojipedia.org/unicode-behind-the-curtain/).
+More info about valid vs. recommended Emoji also in this [blog article on Emojipedia](https://blog.emojipedia.org/unicode-behind-the-curtain/).
 
 #### Singleton Regexes
 
@@ -83,7 +85,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 
 #### Include Textual Emoji
 
-By default, textual Emoji (emoji characters with text variation selector or those that have a default text presentation) will not be included in the default regexes. However, if you wish to match for them too, you can include them in your regex by appending the `_INCLUDE_TEXT` suffix:
+By default, textual Emoji (emoji characters with text variation selector or those that have a default text presentation) will not be included in the default regexes (except in `REGEX_POSSIBLE`). However, if you wish to match for them too, you can include them in your regex by appending the `_INCLUDE_TEXT` suffix:
 
 Regex                         | Description | Example Matches | Example Non-Matches
 ------------------------------|-------------|-----------------|--------------------

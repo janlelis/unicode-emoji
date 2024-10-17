@@ -177,6 +177,22 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_well_formed_core_sequence,
     )
 
+  emoji_possible_modification = \
+    join(
+      emoji_modifier,
+      pack([VS16, EMOJI_KEYCAP_SUFFIX]) + "?",
+      "[󠀠-󠁾]+󠁿" # raw tags
+    )
+
+  emoji_possible_zwj_element = \
+    join(
+      emoji_well_formed_flag_sequence,
+      emoji_character + emoji_possible_modification + "?"
+    )
+
+  emoji_possible = \
+    emoji_possible_zwj_element + "(?:" + pack(ZWJ) + emoji_possible_zwj_element + ")*"
+
   regexes = {}
 
   # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
@@ -187,6 +203,10 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
 
   # Matches basic singleton emoji and all kind of sequences
   regexes[:REGEX_WELL_FORMED] = Regexp.compile(emoji_well_formed_sequence)
+
+  # Quick test which might lead to false positves
+  # See https://www.unicode.org/reports/tr51/#EBNF_and_Regex
+  regexes[:REGEX_POSSIBLE] = Regexp.compile(emoji_possible)
 
   # Matches only basic single, non-textual emoji
   # Ignores "components" like modifiers or simple digits

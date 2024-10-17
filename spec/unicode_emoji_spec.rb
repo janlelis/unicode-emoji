@@ -311,7 +311,7 @@ describe Unicode::Emoji do
       assert_equal "🏴󠁧󠁢󠁡󠁧󠁢󠁿", $&
     end
 
-    it "does match invalid tag sequences" do
+    it "matches invalid base tag sequences" do
       "😴󠁧󠁢󠁡󠁡󠁡󠁿 GB AAA" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_equal "😴󠁧󠁢󠁡󠁡󠁡󠁿", $&
     end
@@ -321,7 +321,7 @@ describe Unicode::Emoji do
       assert_equal "🏴", $&
     end
 
-    it "does not match too long tag sequences (only black flag is matched)" do
+    it "does not match invalid tag sequences (only black flag is matched)" do
       "🏴󠀤󠁿 $" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_equal "🏴", $&
     end
@@ -333,6 +333,106 @@ describe Unicode::Emoji do
 
     it "matches valid zwj sequences, even though they are not recommended" do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🤠‍🤢", $&
+    end
+  end
+
+  describe "REGEX_POSSIBLE" do
+    it "matches most singleton emoji codepoints" do
+      "😴 sleeping face" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "😴", $&
+    end
+
+    it "matches singleton emoji in combination with emoji variation selector" do
+      "😴\u{FE0F} sleeping face" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "😴\u{FE0F}", $&
+    end
+
+    it "matches singleton emoji (without VS) when in combination with text variation selector" do
+      "😴\u{FE0E} sleeping face" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "😴", $&
+    end
+
+    it "matches textual singleton emoji" do
+      "▶ play button" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "▶", $&
+    end
+
+    it "matches textual singleton emoji in combination with emoji variation selector" do
+      "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "▶\u{FE0F}", $&
+    end
+
+    it "matches singleton 'component' emoji codepoints" do
+      "🏻 light skin tone" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🏻", $&
+    end
+
+    it "matches modified emoji if modifier base emoji is used" do
+      "🛌🏽 person in bed: medium skin tone" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🛌🏽", $&
+    end
+
+    it "matches modified emoji even if no modifier base emoji is used" do
+      "🌵🏽 cactus" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🌵🏽", $&
+    end
+
+    it "matches valid region flags" do
+      "🇵🇹 Portugal" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🇵🇹", $&
+    end
+
+    it "does match invalid region flags" do
+      "🇵🇵 PP Land" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🇵🇵", $&
+    end
+
+    it "matches emoji keycap sequences" do
+      "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "2️⃣", $&
+    end
+
+    it "matches only digit of non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "8", $&
+
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "#", $&
+    end
+
+    it "matches recommended tag sequences" do
+      "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🏴󠁧󠁢󠁳󠁣󠁴󠁿", $&
+    end
+
+    it "matches valid tag sequences, even though they are not recommended" do
+      "🏴󠁧󠁢󠁡󠁧󠁢󠁿 GB AGB" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🏴󠁧󠁢󠁡󠁧󠁢󠁿", $&
+    end
+
+    it "matches invalid base tag sequences" do
+      "😴󠁧󠁢󠁡󠁡󠁡󠁿 GB AAA" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "😴󠁧󠁢󠁡󠁡󠁡󠁿", $&
+    end
+
+    it "matches too long tag sequences" do
+      "🏴󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁿 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🏴󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁁󠁿", $&
+    end
+
+    it "machtes invalid tag sequences (only black flag is matched)" do
+      "🏴󠀤󠁿 $" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🏴󠀤󠁿", $&
+    end
+
+    it "matches recommended zwj sequences" do
+      "🤾🏽‍♀️ woman playing handball: medium skin tone" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🤾🏽‍♀️", $&
+    end
+
+    it "matches valid zwj sequences, even though they are not recommended" do
+      "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX_POSSIBLE
       assert_equal "🤠‍🤢", $&
     end
   end
