@@ -206,7 +206,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     )
   )
 
-  # Matches any emoji-related codepoint - Use with caution (returns partil matches)
+  # Matches any emoji-related codepoint - Use with caution (returns partial matches)
   regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
 
   # Combined REGEXes which also match for TEXTUAL emoji
@@ -236,11 +236,11 @@ write_regexes(regexes, File.expand_path("../lib/unicode/emoji/generated", __dir_
 
 native_regexes = compile(
   emoji_character:      "\\p{Emoji}",
-  emoji_modifier:       "\\p{Emoji Modifier}",
-  emoji_modifier_base:  "\\p{Emoji Modifier Base}",
-  emoji_component:      "\\p{Emoji Component}",
-  emoji_presentation:   "\\p{Emoji Presentation}",
-  picto:                "\\p{Extended Pictographic}",
-  picto_no_emoji:       "\\p{Extended Pictographic}(?<!\\p{Emoji})"
+  emoji_modifier:       "\\p{EMod}",
+  emoji_modifier_base:  "\\p{EBase}",
+  emoji_component:      "\\p{EComp}",
+  emoji_presentation:   "\\p{EPres}",
+  picto:                "\\p{ExtPict}",
+  picto_no_emoji:       "\\p{ExtPict}(?<!\\p{Emoji})"
 )
 write_regexes(native_regexes, File.expand_path("../lib/unicode/emoji/generated_native", __dir__))

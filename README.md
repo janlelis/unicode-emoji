@@ -141,9 +141,9 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 
 ## Also See
 
-- [Unicode® Technical Standard #51](https://www.unicode.org/reports/tr51/proposed.html)
+- [Unicode® Technical Standard #51](https://www.unicode.org/reports/tr51/)
 - [Emoji categories](https://unicode.org/emoji/charts/emoji-ordering.html)
-- Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name)
+- Ruby gem which displays [Emoji sequence names](https://github.com/janlelis/unicode-sequence_name) (here [as website](https://character.construction/name))
 - Part of [unicode-x](https://github.com/janlelis/unicode-x)
 
 ## MIT
