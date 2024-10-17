@@ -10,9 +10,7 @@ CLDR version (used for sub-region flags): **45** (April 2024)
 
 Supported Rubies: **3.x**
 
-No longer supported Rubies, but might still work: **2.7**, **2.6**, **2.5**, **2.4**, **2.3**
-
-If you are stuck on an older Ruby version, checkout the latest [0.9 version](https://rubygems.org/gems/unicode-emoji/versions/0.9.3) of this gem.
+No longer supported Rubies, but might still work: **2.7**, **2.6**, **2.5** (use older versions of this gem if you need support for an earlier Ruby)
 
 ## Gemfile
 

@@ -97,10 +97,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     pack_and_join(VALID_REGION_FLAGS)
 
   emoji_well_formed_flag_sequence = \
-    "(?:" +
-      pack_and_join(REGIONAL_INDICATORS) +
-      pack_and_join(REGIONAL_INDICATORS) +
-    ")"
+    '\p{RI}{2}'
 
   emoji_valid_core_sequence = \
     join(

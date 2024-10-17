@@ -2,9 +2,11 @@
 
 ### 3.7.0 (unereleased)
 
+- Bump required Ruby slightly to 2.5
 - Be stricter about selection of tag characters in REGEX_WELL_FORMED
   - Only U+E0030..U+E0039, U+E0061..U+E007A allowed
   - Max tag sequence length
+- Use native /\p{RI}/ regex for regional indicators
 
 ### 3.6.0
 
