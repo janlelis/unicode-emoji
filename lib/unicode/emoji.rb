@@ -11,9 +11,15 @@ module Unicode
     %w[
       EMOJI_CHAR EMOJI_CHAR EMOJI_PRESENTATION TEXT_PRESENTATION EMOJI_COMPONENT EMOJI_MODIFIER_BASES
       EMOJI_MODIFIERS EXTENDED_PICTOGRAPHIC EXTENDED_PICTOGRAPHIC_NO_EMOJI EMOJI_KEYCAPS VALID_REGION_FLAGS
-      VALID_SUBDIVISIONS RECOMMENDED_SUBDIVISION_FLAGS RECOMMENDED_ZWJ_SEQUENCES LIST LIST_REMOVED_KEYS
+      VALID_SUBDIVISIONS RECOMMENDED_SUBDIVISION_FLAGS RECOMMENDED_ZWJ_SEQUENCES
     ].each do |const_name|
       autoload const_name, File.expand_path('emoji/lazy_constants', __dir__)
+    end
+
+    %w[
+      LIST LIST_REMOVED_KEYS
+    ].each do |const_name|
+      autoload const_name, File.expand_path('emoji/list', __dir__)
     end
 
     generated_constants_dirpath = File.expand_path(

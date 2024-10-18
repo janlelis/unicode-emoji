@@ -10,6 +10,8 @@
   - Only U+E0030..U+E0039, U+E0061..U+E007A allowed
   - Max tag sequence length
 - Use native `/\p{RI}/` regex for regional indicators
+- Separately autoload emoji list, so it can be loaded when other indexes
+  are not needed
 
 ### 3.6.0
 

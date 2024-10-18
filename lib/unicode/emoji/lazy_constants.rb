@@ -16,10 +16,5 @@ module Unicode
     VALID_SUBDIVISIONS            = INDEX[:SD].map{_1.sub(/(.)~(.)/, '[\1-\2]') }
     RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
     RECOMMENDED_ZWJ_SEQUENCES     = INDEX[:ZWJ].freeze
-
-    LIST                          = INDEX[:LIST].freeze.each_value(&:freeze)
-    LIST_REMOVED_KEYS             = [
-      "Smileys & People",
-    ].freeze
   end
 end
