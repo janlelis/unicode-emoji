@@ -1,12 +1,12 @@
 # CHANGELOG
 
-### 3.7.0 (unereleased)
+### 3.7.0
 
 - Bump required Ruby slightly to 2.5
 - Introduce new `REGEX_POSSIBLE` which contains the regex described in
   https://www.unicode.org/reports/tr51/#EBNF_and_Regex
 - Fix that some valid subdivisions were not decompressed (`REGEX_VALID`)
-- Be stricter about selection of tag characters in (`REGEX_WELL_FORMED`)
+- Be stricter about selection of tag characters in `REGEX_WELL_FORMED`
   - Only U+E0030..U+E0039, U+E0061..U+E007A allowed
   - Max tag sequence length
 - Use native `/\p{RI}/` regex for regional indicators
