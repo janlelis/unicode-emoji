@@ -21,8 +21,5 @@ module Unicode
     LIST_REMOVED_KEYS             = [
       "Smileys & People",
     ].freeze
-
-
-
   end
 end

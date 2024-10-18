@@ -5,8 +5,8 @@ require File.dirname(__FILE__) + "/lib/unicode/emoji/constants"
 Gem::Specification.new do |gem|
   gem.name          = "unicode-emoji"
   gem.version       = Unicode::Emoji::VERSION
-  gem.summary       = "Retrieve Emoji data about Unicode codepoints."
-  gem.description   = "[Emoji #{Unicode::Emoji::EMOJI_VERSION}] A small Ruby library which provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards. Includes a categorized list of recommended Emoji."
+  gem.summary       = "Emoji data and regex"
+  gem.description   = "[Emoji #{Unicode::Emoji::EMOJI_VERSION}] Provides Unicode Emoji data and regexes, incorporating the latest Unicode and Emoji standards. Includes a categorized list of recommended Emoji."
   gem.authors       = ["Jan Lelis"]
   gem.email         = ["hi@ruby.consulting"]
   gem.homepage      = "https://github.com/janlelis/unicode-emoji"

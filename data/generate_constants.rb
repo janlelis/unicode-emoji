@@ -180,7 +180,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   emoji_possible_modification = \
     join(
       emoji_modifier,
-      pack([VS16, EMOJI_KEYCAP_SUFFIX]) + "?",
+      pack([EMOJI_VARIATION_SELECTOR, EMOJI_KEYCAP_SUFFIX]) + "?",
       "[󠀠-󠁾]+󠁿" # raw tags
     )
 

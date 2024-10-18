@@ -24,8 +24,6 @@ module Unicode
     SPEC_TAGS                     = [*0xE0030..0xE0039, *0xE0061..0xE007A].freeze
     EMOJI_KEYCAP_SUFFIX           = 0x20E3
     ZWJ                           = 0x200D
-    VS15                          = 0xFE0E
-    VS16                          = 0xFE0F
     REGIONAL_INDICATORS           = [*0x1F1E6..0x1F1FF].freeze
   end
 end
