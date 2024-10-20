@@ -73,6 +73,20 @@ describe "emoji-test.txt" do
     end
   end
 
+  describe "REGEX_INCLUDE_TEXT" do
+    describe "detects fully-qualified emoji and (unqualified) singleton text emoji" do
+      iterate_emoji do |emoji, qual_status|
+        it(emoji) do
+          if qual_status == "fully" || qual_status == "un" && emoji.size <= 2
+            assert_equal emoji, emoji[Unicode::Emoji::REGEX_INCLUDE_TEXT]
+          else
+            refute_equal emoji, emoji[Unicode::Emoji::REGEX_INCLUDE_TEXT]
+          end
+        end
+      end
+    end
+  end
+
   describe "REGEX_VALID_INCLUDE_TEXT" do
     describe "detects all emoji" do
       iterate_emoji do |emoji, qual_status|

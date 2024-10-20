@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 3.8.0 (unreleased)
+
+- Improve documentation and add detailed table about which regex has which features
+- Add specs running through `emoji-text.txt` and classify qualification statuses per regex
+
 ### 3.7.0
 
 - Bump required Ruby slightly to 2.5
