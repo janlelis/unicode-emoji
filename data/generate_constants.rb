@@ -68,10 +68,10 @@ def pack_and_join(ords)
   end
 end
 
-def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_component:, emoji_presentation:, picto:, picto_no_emoji:)
+def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_component:, emoji_presentation:, text_presentation:, picto:, picto_no_emoji:)
   emoji_presentation_sequence = \
     join(
-      pack_and_join(TEXT_PRESENTATION) + pack(EMOJI_VARIATION_SELECTOR),
+      text_presentation + pack(EMOJI_VARIATION_SELECTOR),
       emoji_presentation + "(?!" + pack(TEXT_VARIATION_SELECTOR) + ")" + pack(EMOJI_VARIATION_SELECTOR) + "?",
     )
 
@@ -83,7 +83,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
 
   text_presentation_sequence = \
     join(
-      pack_and_join(TEXT_PRESENTATION)+ "(?!" + join(emoji_modifier, pack(EMOJI_VARIATION_SELECTOR)) + ")" + pack(TEXT_VARIATION_SELECTOR) + "?",
+      text_presentation + "(?!" + join(emoji_modifier, pack(EMOJI_VARIATION_SELECTOR)) + ")" + pack(TEXT_VARIATION_SELECTOR) + "?",
       emoji_presentation + pack(TEXT_VARIATION_SELECTOR),
     )
 
@@ -246,6 +246,7 @@ regexes = compile(
   emoji_modifier_base:  pack_and_join(EMOJI_MODIFIER_BASES),
   emoji_component:      pack_and_join(EMOJI_COMPONENT),
   emoji_presentation:   pack_and_join(EMOJI_PRESENTATION),
+  text_presentation:    pack_and_join(TEXT_PRESENTATION),
   picto:                pack_and_join(EXTENDED_PICTOGRAPHIC),
   picto_no_emoji:       pack_and_join(EXTENDED_PICTOGRAPHIC_NO_EMOJI)
 )
@@ -257,6 +258,7 @@ native_regexes = compile(
   emoji_modifier_base:  "\\p{EBase}",
   emoji_component:      "\\p{EComp}",
   emoji_presentation:   "\\p{EPres}",
+  text_presentation:    "\\p{Emoji}(?<!\\p{EPres})",
   picto:                "\\p{ExtPict}",
   picto_no_emoji:       "\\p{ExtPict}(?<!\\p{Emoji})"
 )

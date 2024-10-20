@@ -2,6 +2,7 @@
 
 ### 3.8.0 (unreleased)
 
+- Native regexes: Use native Emoji props for Emoji text presentation
 - Improve documentation and add detailed table about which regex has which features
 - Add specs running through `emoji-text.txt` and classify qualification statuses per regex
 
