@@ -84,7 +84,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 11) Basic Default Text Presentation Characters or Basic Emoji with Text Presentation Selector
 12) Non-Emoji (unqualified) keycap sequence
 
-Regex | 1 RGI/FQE | 2 RGI/MQE | 3 RGI/UQE | 4 Non-RGI | 5 Valid Region | 6 Any Region | 7 RGI Tag | 8 Valid Tag | 9 Any Tag | 10 Basic Emoji | 11 Basic Text | 12 Text Keycap
+Regex | 1 RGI/FQE | 2 RGI/MQE | 3 RGI/UQE | 4 Non-RGI | 5 Valid Re­gion | 6 Any Re­gion | 7 RGI Tag | 8 Valid Tag | 9 Any Tag | 10 Basic Emoji | 11 Basic Text | 12 Text Key­cap
 -|-|-|-|-|-|-|-|-|-|-|-|-
 REGEX                          | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌
 REGEX INCLUDE TEXT             | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅

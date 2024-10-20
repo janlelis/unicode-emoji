@@ -34,6 +34,10 @@ module Unicode
       autoload const_name, File.join(generated_constants_dirpath, const_name.downcase)
     end
 
+    # Return Emoji properties of character as an Array or nil
+    # See PROPERTY_NAMES constant for possible properties
+    # 
+    # Source: see https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt
     def self.properties(char)
       ord = get_codepoint_value(char)
       props = INDEX[:PROPERTIES][ord]
@@ -45,6 +49,7 @@ module Unicode
       end
     end
 
+    # Returns ordered list of Emoji, categorized in a three-level deep Hash structure
     def self.list(key = nil, sub_key = nil)
       return LIST unless key || sub_key
       if LIST_REMOVED_KEYS.include?(key)

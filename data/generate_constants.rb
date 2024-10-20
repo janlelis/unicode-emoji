@@ -223,7 +223,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     )
   )
 
-  # Matches any emoji-related codepoint - Use with caution (returns partial matches)
+  # Same as \p{Emoji} - to be removed or renamed
   regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
 
   # Combined REGEXes which also match for TEXTUAL emoji
