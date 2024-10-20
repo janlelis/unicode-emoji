@@ -28,13 +28,17 @@ task :irb do
 end
 
 # # #
-# Run Specs
+# Run specs
 
 desc "#{gemspec.name} | Spec"
 task :spec do
   ruby "spec/unicode_emoji_spec.rb"
 end
 task default: :spec
+
+
+# # #
+# Generate regex
 
 desc "#{gemspec.name} | Generates all regex constants and saves them to lib/unicode/emoji/{generated,generated_native} directories"
 task :generate_constants do
