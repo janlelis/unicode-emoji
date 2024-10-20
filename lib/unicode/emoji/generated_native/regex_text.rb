@@ -3,6 +3,6 @@
 
 module Unicode
   module Emoji
-    REGEX_TEXT = /(?:(?!\p{EComp})(?:\p{Emoji}(?<!\p{EPres})(?!(?:\p{EMod}|️))︎?|\p{EPres}︎)|(?:\#⃣|\*⃣|0⃣|1⃣|2⃣|3⃣|4⃣|5⃣|6⃣|7⃣|8⃣|9⃣))/
+    REGEX_TEXT = /(?:(?!\p{EComp})(?:\p{Emoji}(?<!\p{EPres})(?!(?:\p{EMod}|️))︎?|\p{EPres}︎)|[\#\*0-9]⃣)/
   end
 end

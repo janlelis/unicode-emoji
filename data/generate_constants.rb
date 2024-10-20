@@ -79,7 +79,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     "(?!" + emoji_component + ")" + emoji_presentation_sequence
 
   text_keycap_sequence = \
-    join(EMOJI_KEYCAPS.map{|keycap| pack([keycap, EMOJI_KEYCAP_SUFFIX]) })
+    pack_and_join(EMOJI_KEYCAPS) + pack(EMOJI_KEYCAP_SUFFIX)
 
   text_presentation_sequence = \
     join(
@@ -153,6 +153,14 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_valid_flag_sequence,
       emoji_core_sequence,
     )
+
+  # emoji_rgi_mqe_sequence = \
+  #   join(
+  #     emoji_rgi_zwj_sequence,
+  #     emoji_rgi_tag_sequence,
+  #     emoji_valid_flag_sequence,
+  #     emoji_core_sequence,
+  #   )
 
   emoji_valid_sequence = \
     join(
