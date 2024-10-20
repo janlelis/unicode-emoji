@@ -17,9 +17,7 @@ CLDR version (used for sub-region flags): **45** (April 2024)
 gem "unicode-emoji"
 ```
 
-## Usage
-
-### Regex
+## Usage – Regex Matching
 
 The gem includes multiple Emoji regexes, which are compiled out of various Emoji Unicode data sources.
 
@@ -41,11 +39,9 @@ string = "String which contains all kinds of emoji:
 string.scan(Unicode::Emoji::REGEX) # => ["😴", "▶️", "🛌🏽", "🇵🇹", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "2️⃣", "🤾🏽‍♀️"]
 ```
 
-#### Regex: Which Type of Emoji?
-
 There are multiple levels of Emoji detection:
 
-#### Main Regexes
+### Main Regexes
 
 Regex                         | Description | Example Matches | Example Non-Matches
 ------------------------------|-------------|-----------------|--------------------
@@ -54,7 +50,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_WELL_FORMED` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji) and all kinds of *well-formed* Emoji sequences | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵` | `😴︎`, `▶`, `🏻`, `1`, `1⃣`
 `Unicode::Emoji::REGEX_POSSIBLE` | Matches all singleton Emoji, singleton components, all kinds of Emoji sequences, and even single digits (except for: unqualified keycap sequences) | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵`, `😴︎`, `▶`, `🏻`, `1` | `1⃣`
 
-##### Include Text Emoji
+#### Include Text Emoji
 
 By default, textual Emoji (emoji characters with text variation selector or those that have a default text presentation) will not be included in the default regexes (except in `REGEX_POSSIBLE`). However, if you wish to match for them too, you can include them in your regex by appending the `_INCLUDE_TEXT` suffix:
 
@@ -64,7 +60,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_VALID_INCLUDE_TEXT` | `REGEX_VALID` + `REGEX_TEXT` | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `😴︎`, `▶`, `1⃣` | `🏻`, `🇵🇵`, `1`
 `Unicode::Emoji::REGEX_WELL_FORMED_INCLUDE_TEXT` | `REGEX_WELL_FORMED` + `REGEX_TEXT` | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`,  `🇵🇵`, `😴︎`, `▶`, `1⃣` | `🏻`, `1`
 
-##### Singleton Regexes
+#### Singleton Regexes
 
 Matches only simple one-codepoint (+ optional variation selector) Emoji:
 
@@ -73,7 +69,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_BASIC` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji), but no sequences at all | `😴`, `▶️` | `😴︎`, `▶`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digits) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 
-##### Comparison 
+### Comparison 
 
 1) Fully-qualified RGI Emoji ZWJ sequence
 2) Minimally-qualified RGI Emoji ZWJ sequence (lacks Emoji Presentation Selectors, but not in the first Emoji character)
@@ -91,44 +87,44 @@ Regex                         | Description | Example Matches | Example Non-Matc
 Regex | 1 RGI/FQE | 2 RGI/MQE | 3 RGI/UQE | 4 Non-RGI | 5 Valid Region | 6 Any Region | 7 RGI Tag | 8 Valid Tag | 9 Any Tag | 10 Basic Emoji | 11 Basic Text | 12 Text Keycap
 -|-|-|-|-|-|-|-|-|-|-|-|-
 REGEX                          | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌
-REGEX_INCLUDE_TEXT             | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅
-REGEX_VALID                    | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌
-REGEX_VALID_INCLUDE_TEXT       | ✅ | ✅ | ✅    | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅
-REGEX_WELL_FORMED              | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌
-REGEX_WELL_FORMED_INCLUDE_TEXT | ✅ | ✅ | ✅    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅
-REGEX_POSSIBLE                 | ✅ | ✅ | ✅    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌
-REGEX_BASIC                    | ❌ | ❌ | ❌    | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌
-REGEX_TEXT                     | ❌ | ❌ | ❌    | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅
+REGEX INCLUDE TEXT             | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅
+REGEX VALID                    | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌
+REGEX VALID INCLUDE TEXT       | ✅ | ✅ | ✅    | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅
+REGEX WELL FORMED              | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌
+REGEX WELL FORMED INCLUDE TEXT | ✅ | ✅ | ✅    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅
+REGEX POSSIBLE                 | ✅ | ✅ | ✅    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌
+REGEX BASIC                    | ❌ | ❌ | ❌    | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌
+REGEX TEXT                     | ❌ | ❌ | ❌    | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅
 
 ¹ Matches all unqualified Emoji, except for textual singleton Emoji (see columns 11, 12)
 
-See spec files for detailed examples about which regex matches which kind of Emoji.
+See [spec files](/spec) for detailed examples about which regex matches which kind of Emoji.
 
-#### Picking the Right Emoji Regex
+### Picking the Right Emoji Regex
 
 - Usually you just want `REGEX` (RGI set)
 - If you want broader matching (any ZWJ sequences, more sub-region flags), choose `REGEX_VALID`
-- Even broader is `REGEX_WELL_FORMED`, which will also match any region flag and any tag sequence 
-- Use `_INCLUDE_TEXT` suffix with any of the above, if you want to also match basic textual Emoji
-- And finally there is also the option to use `REGEX_POSSIBLE` , which is a simplified test for possible Emoji that might contain false positives. However, the regex is less complex and [suggested in the Unicode standard itself](https://www.unicode.org/reports/tr51/#EBNF_and_Regex) as a first check.
+- If you need to match any region flag and any tag sequence, choose `REGEX_WELL_FORMED`
+- Use the `_INCLUDE_TEXT` suffix with any of the above, if you want to also match basic textual Emoji
+- And finally, there is also the option to use `REGEX_POSSIBLE` , which is a simplified test for possible Emoji. It might contain false positives, however, the regex is less complex and [suggested in the Unicode standard itself](https://www.unicode.org/reports/tr51/#EBNF_and_Regex) as a first check.
 
-#### Examples
+### Examples
 
 Desc | Emoji | Escaped | `REGEX` (RGI) | `REGEX_VALID` (Valid) | `REGEX_WELL_FORMED` (Well-formed) | `REGEX_POSSIBLE`
 -----|-------|---------|---------------|-----------------------|-----------------------------------|-----------------
-RGI ZWJ Sequence   | "🤾🏽‍♀️" | `\u{1F93E 1F3FD 200D 2640 FE0F}` | Yes | Yes | Yes | Yes
-Valid ZWJ Sequence | "🤠‍🤢" | `\u{1F920 200D 1F922}` | No  | Yes | Yes | Yes
-Known Region       | "🇵🇹" | `\u{1F1F5 1F1F9}` | Yes | Yes | Yes | Yes
-Unknown Region     | "🇵🇵" | `\u{1F1F5 1F1F5}` | No  | No  | Yes | Yes
-RGI Tag Sequence   | "🏴󠁧󠁢󠁳󠁣󠁴󠁿" | `\u{1F3F4 E0067 E0062 E0073 E0063 E0074 E007F}` | Yes | Yes | Yes | Yes
-Valid Tag Sequence | "🏴󠁧󠁢󠁡󠁧󠁢󠁿" | `\u{1F3F4 E0067 E0062 E0061 E0067 E0062 E007F}` | No  | Yes | Yes | Yes
-Well-formed Tag Sequence | "😴󠁧󠁢󠁡󠁡󠁡󠁿" | `\u{1F634 E0067 E0062 E0061 E0061 E0061 E007F}` | No  | No  | Yes | Yes
+RGI ZWJ Sequence   | 🤾🏽‍♀️ | `\u{1F93E 1F3FD 200D 2640 FE0F}` | ✅ | ✅ | ✅ | ✅
+Valid ZWJ Sequence | 🤠‍🤢 | `\u{1F920 200D 1F922}` | ❌  | ✅ | ✅ | ✅
+Known Region       | 🇵🇹 | `\u{1F1F5 1F1F9}` | ✅ | ✅ | ✅ | ✅
+Unknown Region     | 🇵🇵 | `\u{1F1F5 1F1F5}` | ❌  | ❌  | ✅ | ✅
+RGI Tag Sequence   | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 | `\u{1F3F4 E0067 E0062 E0073 E0063 E0074 E007F}` | ✅ | ✅ | ✅ | ✅
+Valid Tag Sequence | 🏴󠁧󠁢󠁡󠁧󠁢󠁿 | `\u{1F3F4 E0067 E0062 E0061 E0067 E0062 E007F}` | ❌  | ✅ | ✅ | ✅
+Well-formed Tag Sequence | 😴󠁧󠁢󠁡󠁡󠁡󠁿 | `\u{1F634 E0067 E0062 E0061 E0061 E0061 E007F}` | ❌  | ❌  | ✅ | ✅
 
 Please see [the standard](https://www.unicode.org/reports/tr51/#Emoji_Sets) for more details, examples, explanations.
 
 More info about valid vs. recommended Emoji can also be found in this [blog article on Emojipedia](https://blog.emojipedia.org/unicode-behind-the-curtain/).
 
-#### Extended Pictographic Regex
+### Extended Pictographic Regex
 
 `Unicode::Emoji::REGEX_PICTO` matches single codepoints with the **Extended_Pictographic** property. For example, it will match `✀` BLACK SAFETY SCISSORS.
 
@@ -136,7 +132,7 @@ More info about valid vs. recommended Emoji can also be found in this [blog arti
 
 See [character.construction/picto](https://character.construction/picto) for a list of all non-Emoji pictographic characters.
 
-#### Partial Regexes
+### Partial Regexes
 
 **Please note:** Might get removed or renamed in the future. This the same as `\p{Emoji}`
 
@@ -146,7 +142,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 ------------------------------|-------------|-----------------|--------------------
 `Unicode::Emoji::REGEX_ANY`   | Matches any Emoji-related codepoint (but no variation selectors, tags, or zero-width joiners). Please not that this will match Emoji-parts rather than complete Emoji, for example, single digits! | `😴`, `▶`, `🏻`, `🛌`, `🏽`, `🇵`, `🇹`, `2`, `🏴`, `🤾`, `♀`, `🤠`, `🤢` | -
 
-### List
+## Usage – List
 
 Use `Unicode::Emoji::LIST` or the **list** method to get a ordered and categorized list of Emoji:
 
@@ -161,11 +157,11 @@ Unicode::Emoji.list("Food & Drink", "food-asian")
 => ["🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🥮", "🍡", "🥟", "🥠", "🥡"]
 ```
 
-Please note that categories might change with future versions of the Emoji standard, also this has not happened often.
+Please note that categories might change with future versions of the Emoji standard, although this has not happened often.
 
 A list of all Emoji (generated from this gem) can be found at [character.construction/emoji](https://character.construction/emoji).
 
-### Properties Data
+## Usage – Properties Data
 
 Allows you to access the codepoint data form Unicode's [emoji-data.txt](https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt) file:
 
