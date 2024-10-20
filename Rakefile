@@ -32,7 +32,7 @@ end
 
 desc "#{gemspec.name} | Spec"
 task :spec do
-  ruby "spec/unicode_emoji_spec.rb"
+  ruby "spec/*_spec.rb"
 end
 task default: :spec
 
