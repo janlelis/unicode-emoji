@@ -99,22 +99,12 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   emoji_well_formed_flag_sequence = \
     '\p{RI}{2}'
 
-  emoji_valid_core_sequence = \
+  emoji_core_sequence = \
     join(
       # emoji_character,
       emoji_keycap_sequence,
       emoji_modifier_sequence,
       non_component_emoji_presentation_sequence,
-      emoji_valid_flag_sequence,
-    )
-
-  emoji_well_formed_core_sequence = \
-    join(
-      # emoji_character,
-      emoji_keycap_sequence,
-      emoji_modifier_sequence,
-      non_component_emoji_presentation_sequence,
-      emoji_well_formed_flag_sequence,
     )
 
   # Sort to make sure complex sequences match first
@@ -160,21 +150,24 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
     join(
       emoji_rgi_zwj_sequence,
       emoji_rgi_tag_sequence,
-      emoji_valid_core_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
     )
 
   emoji_valid_sequence = \
     join(
       emoji_valid_zwj_sequence,
       emoji_valid_tag_sequence,
-      emoji_valid_core_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
     )
 
   emoji_well_formed_sequence = \
     join(
       emoji_valid_zwj_sequence,
       emoji_well_formed_tag_sequence,
-      emoji_well_formed_core_sequence,
+      emoji_well_formed_flag_sequence,
+      emoji_core_sequence,
     )
 
   emoji_possible_modification = \
