@@ -32,7 +32,7 @@ end
 
 desc "#{gemspec.name} | Spec"
 task :spec do
-  ruby "spec/*_spec.rb"
+  ruby File.join("spec", "*_spec.rb")
 end
 task default: :spec
 
