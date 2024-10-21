@@ -69,6 +69,10 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_BASIC` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji), but no sequences at all | `😴`, `▶️` | `😴︎`, `▶`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digits) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 
+You can see all Emoji these two regexes will match at: [character.construction/emoji-vs-text](https://character.construction/emoji-vs-text)
+
+While `REGEX_BASIC` is part of the above regexes, `REGEX_TEXT` is only included in the `_INCLUDE_TEXT` versions.
+
 ### Comparison 
 
 1) Fully-qualified RGI Emoji ZWJ sequence
@@ -106,7 +110,7 @@ See [spec files](/spec) for detailed examples about which regex matches which ki
 - If you want broader matching (any ZWJ sequences, more sub-region flags), choose `REGEX_VALID`
 - If you need to match any region flag and any tag sequence, choose `REGEX_WELL_FORMED`
 - Use the `_INCLUDE_TEXT` suffix with any of the above, if you want to also match basic textual Emoji
-- And finally, there is also the option to use `REGEX_POSSIBLE` , which is a simplified test for possible Emoji. It might contain false positives, however, the regex is less complex and [suggested in the Unicode standard itself](https://www.unicode.org/reports/tr51/#EBNF_and_Regex) as a first check.
+- And finally, there is also the option to use `REGEX_POSSIBLE`, which is a simplified test for possible Emoji, comparable to `REGEX_WELL_FORMED*`. It might contain false positives, however, the regex is less complex and [suggested in the Unicode standard itself](https://www.unicode.org/reports/tr51/#EBNF_and_Regex) as a first check.
 
 ### Examples
 
