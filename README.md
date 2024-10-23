@@ -39,7 +39,7 @@ string = "String which contains all kinds of emoji:
 string.scan(Unicode::Emoji::REGEX) # => ["😴", "▶️", "🛌🏽", "🇵🇹", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "2️⃣", "🤾🏽‍♀️"]
 ```
 
-There are multiple levels of Emoji detection:
+Depending on your exact usecase, you can choose between multiple levels of Emoji detection:
 
 ### Main Regexes
 
@@ -69,15 +69,15 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_BASIC` | Matches (non-textual) singleton Emoji (except for singleton components, like a skin tone modifier without base Emoji), but no sequences at all | `😴`, `▶️` | `😴︎`, `▶`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji (except for singleton components, like digits) | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤠‍🤢`, `1`
 
-You can see all Emoji these two regexes will match at: [character.construction/emoji-vs-text](https://character.construction/emoji-vs-text)
+Here is a list of all Emoji that can be matched using the two regexes: [character.construction/emoji-vs-text](https://character.construction/emoji-vs-text)
 
-While `REGEX_BASIC` is part of the above regexes, `REGEX_TEXT` is only included in the `_INCLUDE_TEXT` versions.
+While `REGEX_BASIC` is part of the above regexes, `REGEX_TEXT` is only included in the `*_INCLUDE_TEXT` or `*_UQE` variants.
 
 ### Comparison 
 
 1) Fully-qualified RGI Emoji ZWJ sequence
 2) Minimally-qualified RGI Emoji ZWJ sequence (lacks Emoji Presentation Selectors, but not in the first Emoji character)
-3) Unqualified RGI Emoji ZWJ sequence (lacks Emoji Presentation Selector, including in the first Emoji character)
+3) Unqualified RGI Emoji ZWJ sequence (lacks Emoji Presentation Selector, including in the first Emoji character). Unqualified Emoji include all basic Emoji in Text Presentation (see column 11/12).
 4) Non-RGI Emoji ZWJ sequence
 5) Valid Region made from pair of Regional Indicators
 6) Any Region made from pair of Regional Indicators
@@ -86,12 +86,14 @@ While `REGEX_BASIC` is part of the above regexes, `REGEX_TEXT` is only included 
 9) Any Flag Emoji Tag Sequences (any tag sequence)
 10) Basic Default Emoji Presentation Characters or Text characters with Emoji Presentation Selector
 11) Basic Default Text Presentation Characters or Basic Emoji with Text Presentation Selector
-12) Non-Emoji (unqualified) keycap sequence
+12) Non-Emoji (unqualified) keycap
 
 Regex | 1 RGI/FQE | 2 RGI/MQE | 3 RGI/UQE | 4 Non-RGI | 5 Valid Re­gion | 6 Any Re­gion | 7 RGI Tag | 8 Valid Tag | 9 Any Tag | 10 Basic Emoji | 11 Basic Text | 12 Text Key­cap
 -|-|-|-|-|-|-|-|-|-|-|-|-
 REGEX                          | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌
 REGEX INCLUDE TEXT             | ✅ | ❌ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅
+REGEX INCLUDE MQE              | ✅ | ✅ | ❌    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌
+REGEX INCLUDE MQE UQE          | ✅ | ✅ | ✅    | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅
 REGEX VALID                    | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌
 REGEX VALID INCLUDE TEXT       | ✅ | ✅ | ✅    | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅
 REGEX WELL FORMED              | ✅ | ✅ | (✅)¹ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌

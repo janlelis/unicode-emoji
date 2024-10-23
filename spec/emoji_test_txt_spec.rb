@@ -45,34 +45,6 @@ describe "emoji-test.txt" do
     end
   end
 
-  describe "REGEX_VALID" do
-    describe "detects fully-qualified, minimally-qualified emoji, and unqualified emoji with ZWJ" do
-      iterate_emoji do |emoji, qual_status|
-        it(emoji) do
-          if qual_status == "fully" || qual_status == "minimally" || qual_status == "un" && emoji.size >= 3
-            assert_equal emoji, emoji[Unicode::Emoji::REGEX_VALID]
-          else
-            refute_equal emoji, emoji[Unicode::Emoji::REGEX_VALID]
-          end
-        end
-      end
-    end
-  end
-
-  describe "REGEX_WELL_FORMED" do
-    describe "detects fully-qualified, minimally-qualified emoji, and unqualified emoji with ZWJ" do
-      iterate_emoji do |emoji, qual_status|
-        it(emoji) do
-          if qual_status == "fully" || qual_status == "minimally" || qual_status == "un" && emoji.size >= 3
-            assert_equal emoji, emoji[Unicode::Emoji::REGEX_WELL_FORMED]
-          else
-            refute_equal emoji, emoji[Unicode::Emoji::REGEX_WELL_FORMED]
-          end
-        end
-      end
-    end
-  end
-
   describe "REGEX_INCLUDE_TEXT" do
     describe "detects fully-qualified emoji and (unqualified) singleton text emoji" do
       iterate_emoji do |emoji, qual_status|
@@ -87,11 +59,63 @@ describe "emoji-test.txt" do
     end
   end
 
+  describe "REGEX_INCLUDE_MQE" do
+    describe "detects fully-qualified emoji and minimally-qualified emoji" do
+      iterate_emoji do |emoji, qual_status|
+        it(emoji) do
+          if qual_status == "fully" || qual_status == "minimally"
+            assert_equal emoji, emoji[Unicode::Emoji::REGEX_INCLUDE_MQE]
+          else
+            refute_equal emoji, emoji[Unicode::Emoji::REGEX_INCLUDE_MQE]
+          end
+        end
+      end
+    end
+  end
+
+  describe "REGEX_INCLUDE_MQE_UQE" do
+    describe "detects all emoji" do
+      iterate_emoji do |emoji, qual_status|
+        it(emoji) do
+          assert_equal emoji, emoji[Unicode::Emoji::REGEX_INCLUDE_MQE_UQE]
+        end
+      end
+    end
+  end
+
+  describe "REGEX_VALID" do
+    describe "detects fully-qualified, minimally-qualified emoji, and unqualified emoji with ZWJ" do
+      iterate_emoji do |emoji, qual_status|
+        it(emoji) do
+          if qual_status == "fully" || qual_status == "minimally" || qual_status == "un" && emoji.size >= 3
+            assert_equal emoji, emoji[Unicode::Emoji::REGEX_VALID]
+          else
+            refute_equal emoji, emoji[Unicode::Emoji::REGEX_VALID]
+          end
+        end
+      end
+    end
+  end
+
   describe "REGEX_VALID_INCLUDE_TEXT" do
     describe "detects all emoji" do
       iterate_emoji do |emoji, qual_status|
         it(emoji) do
           assert_equal emoji, emoji[Unicode::Emoji::REGEX_VALID_INCLUDE_TEXT]
+        end
+      end
+    end
+  end
+
+  describe "REGEX_WELL_FORMED" do
+    describe "detects fully-qualified, minimally-qualified emoji, and unqualified emoji with ZWJ" do
+      iterate_emoji do |emoji, qual_status|
+        it(emoji) do
+          if qual_status == "fully" || qual_status == "minimally" || qual_status == "un" && emoji.size >= 3
+            assert_equal emoji, emoji[Unicode::Emoji::REGEX_WELL_FORMED]
+          else
+            refute_equal emoji, emoji[Unicode::Emoji::REGEX_WELL_FORMED]
+          end
         end
       end
     end
@@ -130,8 +154,8 @@ describe "emoji-test.txt" do
     describe "detects (unqualified) singleton text emoji" do
       iterate_emoji do |emoji, qual_status|
         it(emoji) do
-          if qual_status == "un" && emoji.size <= 2
           # if qual_status == "un" && emoji =~ /^.[\u{FE0E 20E3}]?$/
+          if qual_status == "un" && emoji.size <= 2
             assert_equal emoji, emoji[Unicode::Emoji::REGEX_TEXT]
           else
             refute_equal emoji, emoji[Unicode::Emoji::REGEX_TEXT]

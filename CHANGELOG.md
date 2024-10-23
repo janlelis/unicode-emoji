@@ -2,9 +2,12 @@
 
 ### 3.8.0 (unreleased)
 
-- Native regexes: Use native Emoji props for Emoji text presentation
-- Improve documentation and add detailed table about which regex has which features
+- Add new RGI-based regexes `REGEX_INCLUDE_MQE` and `REGEX_INCLUDE_MQE_UQE` which allows to match
+  for minimally-qualified and unqualified RGI sequences (Emoji that lack some VS16)
 - Add specs running through `emoji-text.txt` and classify qualification statuses per regex
+- Improve documentation and add detailed table about which regex has which features
+- Native regexes: Use native Emoji props for Emoji text presentation
+- Further improvements (see commit log)
 
 ### 3.7.0
 

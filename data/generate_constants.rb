@@ -87,6 +87,12 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_presentation + pack(TEXT_VARIATION_SELECTOR),
     )
 
+  text_emoji = \
+    join(
+      "(?!" + emoji_component + ")" + text_presentation_sequence,
+      text_keycap_sequence,
+    )
+
   emoji_modifier_sequence = \
     emoji_modifier_base + emoji_modifier
 
@@ -101,7 +107,6 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
 
   emoji_core_sequence = \
     join(
-      # emoji_character,
       emoji_keycap_sequence,
       emoji_modifier_sequence,
       non_component_emoji_presentation_sequence,
@@ -134,6 +139,18 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   emoji_rgi_zwj_sequence = \
     pack_and_join(RECOMMENDED_ZWJ_SEQUENCES.sort_by(&:length).reverse)
 
+  # FQE+MQE: Make VS16 optional after ZWJ has appeared
+  emoji_rgi_include_mqe_zwj_sequence = emoji_rgi_zwj_sequence.gsub(
+      /#{ pack(ZWJ) }[^|]+?\K#{ pack(EMOJI_VARIATION_SELECTOR) }/,
+      pack(EMOJI_VARIATION_SELECTOR) + "?"
+    )
+
+  # FQE+MQE+UQE: Make all VS16 optional
+  emoji_rgi_include_mqe_uqe_zwj_sequence = emoji_rgi_zwj_sequence.gsub(
+      pack(EMOJI_VARIATION_SELECTOR),
+      pack(EMOJI_VARIATION_SELECTOR) + "?",
+    )
+
   emoji_valid_zwj_element = \
     join(
       emoji_modifier_sequence,
@@ -154,13 +171,22 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_core_sequence,
     )
 
-  # emoji_rgi_mqe_sequence = \
-  #   join(
-  #     emoji_rgi_zwj_sequence,
-  #     emoji_rgi_tag_sequence,
-  #     emoji_valid_flag_sequence,
-  #     emoji_core_sequence,
-  #   )
+  emoji_rgi_include_mqe_sequence = \
+    join(
+      emoji_rgi_include_mqe_zwj_sequence,
+      emoji_rgi_tag_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
+    )
+
+  emoji_rgi_include_mqe_uqe_sequence = \
+    join(
+      emoji_rgi_include_mqe_uqe_zwj_sequence,
+      text_emoji, # also uqe
+      emoji_rgi_tag_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
+    )
 
   emoji_valid_sequence = \
     join(
@@ -199,6 +225,14 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
   regexes[:REGEX] = Regexp.compile(emoji_rgi_sequence)
 
+  # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
+  # Also make VS16 optional if not at first emoji character
+  regexes[:REGEX_INCLUDE_MQE] = Regexp.compile(emoji_rgi_include_mqe_sequence)
+
+  # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
+  # Also make VS16 optional even at first emoji character
+  regexes[:REGEX_INCLUDE_MQE_UQE] = Regexp.compile(emoji_rgi_include_mqe_uqe_sequence)
+
   # Matches basic singleton emoji and all kind of valid sequences
   regexes[:REGEX_VALID] = Regexp.compile(emoji_valid_sequence)
 
@@ -209,20 +243,11 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # See https://www.unicode.org/reports/tr51/#EBNF_and_Regex
   regexes[:REGEX_POSSIBLE] = Regexp.compile(emoji_possible)
 
-  # Matches only basic single, non-textual emoji
-  # Ignores "components" like modifiers or simple digits
-  regexes[:REGEX_BASIC] = Regexp.compile(
-    "(?!" + emoji_component + ")" + emoji_presentation_sequence
-  )
+  # Matches only basic single, non-textual emoji, ignores "components" like modifiers or simple digits
+  regexes[:REGEX_BASIC] = Regexp.compile(non_component_emoji_presentation_sequence)
 
-  # Matches only basic single, textual emoji
-  # Ignores "components" like modifiers or simple digits
-  regexes[:REGEX_TEXT] = Regexp.compile(
-    join(
-      "(?!" + emoji_component + ")" + text_presentation_sequence,
-      text_keycap_sequence,
-    )
-  )
+  # Matches only basic single, textual emoji, ignores "components" like modifiers or simple digits
+  regexes[:REGEX_TEXT] = Regexp.compile(text_emoji)
 
   # Same as \p{Emoji} - to be removed or renamed
   regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
