@@ -171,6 +171,15 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_core_sequence,
     )
 
+  emoji_rgi_sequence_include_text = \
+    join(
+      emoji_rgi_zwj_sequence,
+      emoji_rgi_tag_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
+      text_emoji,
+    )
+
   emoji_rgi_include_mqe_sequence = \
     join(
       emoji_rgi_include_mqe_zwj_sequence,
@@ -196,12 +205,30 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_core_sequence,
     )
 
+  emoji_valid_sequence_include_text = \
+    join(
+      emoji_valid_zwj_sequence,
+      emoji_valid_tag_sequence,
+      emoji_valid_flag_sequence,
+      emoji_core_sequence,
+      text_emoji,
+    )
+
   emoji_well_formed_sequence = \
     join(
       emoji_valid_zwj_sequence,
       emoji_well_formed_tag_sequence,
       emoji_well_formed_flag_sequence,
       emoji_core_sequence,
+    )
+
+  emoji_well_formed_sequence_include_text = \
+    join(
+      emoji_valid_zwj_sequence,
+      emoji_well_formed_tag_sequence,
+      emoji_well_formed_flag_sequence,
+      emoji_core_sequence,
+      text_emoji,
     )
 
   emoji_possible_modification = \
@@ -225,6 +252,9 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
   regexes[:REGEX] = Regexp.compile(emoji_rgi_sequence)
 
+  # rgi + singleton text
+  regexes[:REGEX_INCLUDE_TEXT] = Regexp.compile(emoji_rgi_sequence_include_text)
+
   # Matches basic singleton emoji and all kind of sequences, but restrict zwj and tag sequences to known sequences (rgi)
   # Also make VS16 optional if not at first emoji character
   regexes[:REGEX_INCLUDE_MQE] = Regexp.compile(emoji_rgi_include_mqe_sequence)
@@ -236,8 +266,14 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Matches basic singleton emoji and all kind of valid sequences
   regexes[:REGEX_VALID] = Regexp.compile(emoji_valid_sequence)
 
+  # valid + singleton text
+  regexes[:REGEX_VALID_INCLUDE_TEXT] = Regexp.compile(emoji_valid_sequence_include_text)
+  
   # Matches basic singleton emoji and all kind of sequences
   regexes[:REGEX_WELL_FORMED] = Regexp.compile(emoji_well_formed_sequence)
+  
+  # well-formed + singleton text
+  regexes[:REGEX_WELL_FORMED_INCLUDE_TEXT] = Regexp.compile(emoji_well_formed_sequence_include_text)
 
   # Quick test which might lead to false positves
   # See https://www.unicode.org/reports/tr51/#EBNF_and_Regex
@@ -251,13 +287,6 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
 
   # Same as \p{Emoji} - to be removed or renamed
   regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
-
-  # Combined REGEXes which also match for TEXTUAL emoji
-  regexes[:REGEX_INCLUDE_TEXT] = Regexp.union(regexes[:REGEX], regexes[:REGEX_TEXT])
-
-  regexes[:REGEX_VALID_INCLUDE_TEXT] = Regexp.union(regexes[:REGEX_VALID], regexes[:REGEX_TEXT])
-
-  regexes[:REGEX_WELL_FORMED_INCLUDE_TEXT] = Regexp.union(regexes[:REGEX_WELL_FORMED], regexes[:REGEX_TEXT])
 
   regexes[:REGEX_PICTO] = Regexp.compile(picto)
 
