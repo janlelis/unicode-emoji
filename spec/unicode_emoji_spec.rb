@@ -92,6 +92,16 @@ describe Unicode::Emoji do
       assert_equal "🤾🏽‍♀️", $&
     end
 
+    it "does not match MQE zwj sequences" do
+      "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX
+      refute_equal `🤾🏽‍♀`, $&
+    end
+
+    it "does not match UQE emoji" do
+      "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX
+      refute_equal `🏌‍♂️`, $&
+    end
+
     it "does not match valid zwj sequences that are not recommended" do
       "🤠‍🤢 vomiting cowboy" =~ Unicode::Emoji::REGEX
       assert_equal "🤠", $&
@@ -137,6 +147,30 @@ describe Unicode::Emoji do
       ["👨‍👩‍👧‍👦", "👨‍👩‍👦‍👦", "👨‍👩‍👧‍👧", "👨‍👨‍👧‍👦", "👨‍👨‍👦‍👦", "👨‍👨‍👧‍👧", "👩‍👩‍👧‍👦", "👩‍👩‍👦‍👦", "👩‍👩‍👧‍👧", "👨‍👦‍👦", "👨‍👧‍👦", "👨‍👧‍👧", "👩‍👦‍👦", "👩‍👧‍👦", "👩‍👧‍👧"].each { |family|
         assert_equal family, family[Unicode::Emoji::REGEX]
       }
+    end
+  end
+
+  describe "REGEX_INCLUDE_MQE" do
+    it "matches MQE emoji" do
+      "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE
+      assert_equal `🤾🏽‍♀`, $&
+    end
+
+    it "does not match UQE emoji" do
+      "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE
+      refute_equal `🏌‍♂️`, $&
+    end
+  end
+
+  describe "REGEX_INCLUDE_MQE_UQE" do
+    it "matches MQE emoji" do
+      "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE_UQE
+      assert_equal `🤾🏽‍♀`, $&
+    end
+
+    it "matches UQE emoji" do
+      "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE_UQE
+      assert_equal `🏌‍♂️`, $&
     end
   end
 
