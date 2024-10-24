@@ -7,6 +7,7 @@
 - Add specs running through `emoji-text.txt` and classify qualification statuses per regex
 - Improve documentation and add detailed table about which regex has which features
 - Native regexes: Use native Emoji props for Emoji text presentation
+- Update CLDR to v46 (valid subdivisions)
 - Further improvements (see commit log)
 
 ### 3.7.0
@@ -38,7 +39,7 @@
 ### 3.3.2
 
 - Update valid subdivisions to CLDR 43 (no changes)
-  -> there won't be any new subdivision flags in Emoji
+  -> there won't be any new RGI subdivision flags in Emoji
 
 ### 3.3.1
 
