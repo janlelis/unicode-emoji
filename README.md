@@ -66,6 +66,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_INCLUDE_MQE` | Like `REGEX`, but additionally includes Emoji with missing Emoji Presentation Variation Selectors, where the first partial Emoji has all required Variation Selectors | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🤾🏽‍♀️`, `🤾🏽‍♀` | `🏌‍♂️`, `😴︎`, `▶`, `🏻`, `🇵🇵`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤠‍🤢`, `1`, `1⃣`
 `Unicode::Emoji::REGEX_INCLUDE_MQE_UQE` | Like `REGEX`, but additionally includes Emoji with missing Emoji Presentation Variation Selectors | `😴`, `▶️`, `🛌🏽`, `🇵🇹`, `2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🤾🏽‍♀️`, `🤾🏽‍♀`, `🏌‍♂️` | `😴︎`, `▶`, `🏻`, `🇵🇵`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤠‍🤢`, `1`, `1⃣`
 
+[List of MQE and UQE Emoji sequences](https://character.construction/unqualified-emoji)
 
 #### Singleton Regexes
 
