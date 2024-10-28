@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 3.8.0 (unreleased)
+### 3.8.0
 
 - Add new RGI-based regexes `REGEX_INCLUDE_MQE` and `REGEX_INCLUDE_MQE_UQE` which allows to match
   for minimally-qualified and unqualified RGI sequences (Emoji that lack some VS16)
