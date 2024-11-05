@@ -596,9 +596,9 @@ describe Unicode::Emoji do
     end
   end
 
-  describe "REGEX_ANY" do
+  describe "REGEX_PROP_EMOJI" do
     it "returns any emoji-related codepoint (but no variation selectors or tags)" do
-      matches = "1 string 😴\u{FE0F} sleeping face with 🇵 and modifier 🏾, also 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland".scan(Unicode::Emoji::REGEX_ANY)
+      matches = "1 string 😴\u{FE0F} sleeping face with 🇵 and modifier 🏾, also 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland".scan(Unicode::Emoji::REGEX_PROP_EMOJI)
       assert_equal ["1", "😴", "🇵", "🏾", "🏴"], matches
     end
   end

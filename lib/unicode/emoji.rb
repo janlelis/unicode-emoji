@@ -49,9 +49,14 @@ module Unicode
       REGEX_POSSIBLE
       REGEX_BASIC
       REGEX_TEXT
+      REGEX_ANY
+      REGEX_PROP_EMOJI
+      REGEX_PROP_MODIFIER
+      REGEX_PROP_MODIFIER_BASE
+      REGEX_PROP_COMPONENT
+      REGEX_PROP_PRESENTATION
       REGEX_PICTO
       REGEX_PICTO_NO_EMOJI
-      REGEX_ANY
     ].each do |const_name|
       autoload const_name, File.join(generated_constants_dirpath, const_name.downcase)
     end

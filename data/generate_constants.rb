@@ -288,8 +288,15 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Same as \p{Emoji} - to be removed or renamed
   regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
 
-  regexes[:REGEX_PICTO] = Regexp.compile(picto)
+  # Export regexes for Emoji properties so they can be used with newer Unicode than Ruby's
+  regexes[:REGEX_PROP_EMOJI] = Regexp.compile(emoji_character)
+  regexes[:REGEX_PROP_MODIFIER] = Regexp.compile(emoji_modifier)
+  regexes[:REGEX_PROP_MODIFIER_BASE] = Regexp.compile(emoji_modifier_base)
+  regexes[:REGEX_PROP_COMPONENT] = Regexp.compile(emoji_component)
+  regexes[:REGEX_PROP_PRESENTATION] = Regexp.compile(emoji_presentation)
 
+  # Same goes for ExtendedPictographic
+  regexes[:REGEX_PICTO] = Regexp.compile(picto)
   regexes[:REGEX_PICTO_NO_EMOJI] = Regexp.compile(picto_no_emoji)
 
   regexes

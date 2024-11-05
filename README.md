@@ -140,17 +140,25 @@ Please see [the standard](https://www.unicode.org/reports/tr51/#Emoji_Sets) for 
 
 More info about valid vs. recommended Emoji can also be found in this [blog article on Emojipedia](https://blog.emojipedia.org/unicode-behind-the-curtain/).
 
-### Extended Pictographic Regex
+### Emoji Property Regexes
+
+Ruby includes native regex Emoji properties, as listed in the following table. You can also opt-in to use the `*_PROP_*` regexes to get the Emoji support level of this gem (instead of Rubies).
+
+Gem Regex (`Unicode::Emoji`'s Emoji support level) | Native Regex (Ruby's Emoji support level)
+---------------------------------------------------|------------------------------------------
+`Unicode::Emoji::REGEX_PROP_EMOJI`         | `/\p{Emoji}/`
+`Unicode::Emoji::REGEX_PROP_MODIFIER`      | `/\p{EMod}/`
+`Unicode::Emoji::REGEX_PROP_MODIFIER_BASE` | `/\p{EBase}/`
+`Unicode::Emoji::REGEX_PROP_COMPONENT`     | `/\p{EComp}/`
+`Unicode::Emoji::REGEX_PROP_PRESENTATION`  | `/\p{EPres}/`
+
+#### Extended Pictographic Regex
 
 `Unicode::Emoji::REGEX_PICTO` matches single codepoints with the **Extended_Pictographic** property. For example, it will match `✀` BLACK SAFETY SCISSORS.
 
 `Unicode::Emoji::REGEX_PICTO_NO_EMOJI` matches single codepoints with the **Extended_Pictographic** property, but excludes Emoji characters.
 
 See [character.construction/picto](https://character.construction/picto) for a list of all non-Emoji pictographic characters.
-
-### Partial Regexes
-
-`Unicode::Emoji::REGEX_ANY`, same as `\p{Emoji}`. Deprecated: Will be removed or renamed in the future.
 
 ## Usage – List
 

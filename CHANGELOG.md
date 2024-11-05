@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 3.9.0 (unreleased)
+
+- Expose regexes for Emoji props. The advantage over using the native regex properties directly
+  is that you are able to use the Emoji support level of this gem instead of Ruby's. For example,
+  as of releasing this, the current Emoji version is 16.0, while Ruby is at 15.0.
+- Deprecate `REGEX_ANY` in favor of `REGEX_PROP_EMOJI`
+
 ### 3.8.0
 
 - Add new RGI-based regexes `REGEX_INCLUDE_MQE` and `REGEX_INCLUDE_MQE_UQE` which allows to match
