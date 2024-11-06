@@ -3,6 +3,6 @@
 
 module Unicode
   module Emoji
-    REGEX_PICTO_NO_EMOJI = /\p{ExtPict}(?<!\p{Emoji})/
+    REGEX_PICTO_NO_EMOJI = /[\p{ExtPict}&&\P{Emoji}]/
   end
 end

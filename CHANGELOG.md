@@ -6,6 +6,7 @@
   is that you are able to use the Emoji support level of this gem instead of Ruby's. For example,
   as of releasing this, the current Emoji version is 16.0, while Ruby is at 15.0.
 - Deprecate `REGEX_ANY` in favor of `REGEX_PROP_EMOJI`
+- Use character class instead of lookbehind for native text emoji and non-emoji pictographic regexes
 
 ### 3.8.0
 

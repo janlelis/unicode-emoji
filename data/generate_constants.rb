@@ -320,8 +320,8 @@ native_regexes = compile(
   emoji_modifier_base:  "\\p{EBase}",
   emoji_component:      "\\p{EComp}",
   emoji_presentation:   "\\p{EPres}",
-  text_presentation:    "\\p{Emoji}(?<!\\p{EPres})",
+  text_presentation:    "[\\p{Emoji}&&\\P{EPres}]",
   picto:                "\\p{ExtPict}",
-  picto_no_emoji:       "\\p{ExtPict}(?<!\\p{Emoji})"
+  picto_no_emoji:       "[\\p{ExtPict}&&\\P{Emoji}]"
 )
 write_regexes(native_regexes, File.expand_path("../lib/unicode/emoji/generated_native", __dir__))
