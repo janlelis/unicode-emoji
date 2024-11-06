@@ -37,7 +37,7 @@ string = "String which contains all types of Emoji sequences:
 - Sequence using ZWJ (zero width joiner): 🤾🏽‍♀️
 "
 
-string.scan(Unicode::Emoji::REGEX) # => ["😴", "▶️", "🛌🏽", "🇵🇹", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "2️⃣", "🤾🏽‍♀️"]
+string.scan(Unicode::Emoji::REGEX) # => ["😴", "▶️", "🛌🏽", "🇵🇹", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "2️⃣", "🏻", "🤾🏽‍♀️"]
 ```
 
 Depending on your exact usecase, you can choose between multiple levels of Emoji detection:
