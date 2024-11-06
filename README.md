@@ -79,7 +79,7 @@ Regex                         | Description | Example Matches | Example Non-Matc
 `Unicode::Emoji::REGEX_BASIC` | Matches (non-textual) Basic Emoji, but no sequences at all | `😴`, `▶️`, `🏻` | `😴︎`, `▶`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤾🏽‍♀`, `🏌‍♂️`, `🤠‍🤢`, `1`
 `Unicode::Emoji::REGEX_TEXT`  | Matches only textual singleton Emoji | `😴︎`, `▶` | `😴`, `▶️`, `🏻`, `🛌🏽`, `🇵🇹`, `🇵🇵`,`2️⃣`, `🏴󠁧󠁢󠁳󠁣󠁴󠁿`, `🏴󠁧󠁢󠁡󠁧󠁢󠁿`, `🤾🏽‍♀️`, `🤾🏽‍♀`, `🏌‍♂️`, `🤠‍🤢`, `1`
 
-Here is a list of all Emoji that can be matched using the two regexes: [character.construction/emoji-vs-text](https://character.construction/emoji-vs-text). The `REGEX_BASIC` regex also matches visual Emoji components (skin tone modifiers and hair components).
+Here is a list of all Emoji that can be matched using the two regexes: [character.construction/emoji-vs-text](https://character.construction/emoji-vs-text). The `REGEX_BASIC` regex also matches [visual Emoji components](https://character.construction/emoji-components) (skin tone modifiers and hair components).
 
 While `REGEX_BASIC` is part of the above regexes, `REGEX_TEXT` is only included in the `*_INCLUDE_TEXT` or `*_UQE` variants.
 
