@@ -2,9 +2,9 @@
 
 module Unicode
   module Emoji
-    VERSION = "3.8.0"
+    VERSION = "4.0.0"
     EMOJI_VERSION = "16.0"
-    CLDR_VERSION = "45"
+    CLDR_VERSION = "46"
     DATA_DIRECTORY = File.expand_path('../../../data', __dir__).freeze
     INDEX_FILENAME = (DATA_DIRECTORY + "/emoji.marshal.gz").freeze
 
@@ -41,5 +41,9 @@ module Unicode
 
     # Two regional indicators make up a region
     REGIONAL_INDICATORS           = [*0x1F1E6..0x1F1FF].freeze
+
+    # The current list of Emoji components that should have a visual representation
+    # Currently skin tone modifiers + hair components
+    VISUAL_COMPONENT              = [*0x1F3FB..0x1F3FF, *0x1F9B0..0x1F9B3]
   end
 end

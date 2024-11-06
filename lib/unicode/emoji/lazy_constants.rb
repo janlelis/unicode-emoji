@@ -20,10 +20,6 @@ module Unicode
     # (Emoji version of this gem might be more recent than Ruby's Emoji version)
     EMOJI_COMPONENT               = INDEX[:PROPERTIES].select{ |ord, props| props.include?(:C) }.keys.freeze
 
-    # The current list of Emoji components that should have a visual representation
-    # Currently skin tone modifiers + hair components
-    VISUAL_COMPONENT              = [*0x1F3FB..0x1F3FF, *0x1F9B0..0x1F9B3]
-
     # The current list of codepoints with the "Emoji_Modifier_Base" property
     # Same characters as \p{Emoji Modifier Base} or \p{EBase}
     # (Emoji version of this gem might be more recent than Ruby's Emoji version)
