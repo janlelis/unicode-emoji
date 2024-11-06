@@ -1,6 +1,7 @@
 # Unicode::Emoji [![[version]](https://badge.fury.io/rb/unicode-emoji.svg)](https://badge.fury.io/rb/unicode-emoji)  [![[ci]](https://github.com/janlelis/unicode-emoji/workflows/Test/badge.svg)](https://github.com/janlelis/unicode-emoji/actions?query=workflow%3ATest)
 
-Provides regular expressions to find Emoji in strings, incorporating the latest Unicode / Emoji standards.
+Provides various sophisticated regular expressions to work with Emoji in strings,
+incorporating the latest Unicode / Emoji standards.
 
 Additional features:
 
@@ -26,12 +27,13 @@ require "unicode/emoji"
 
 string = "String which contains all types of Emoji sequences:
 
-- Singleton Emoji: 😴
-- Textual singleton Emoji with Emoji variation: ▶️
+- Basic Emoji: 😴
+- Textual Emoji with Emoji variation (VS16): ▶️
 - Emoji with skin tone modifier: 🛌🏽
 - Region flag: 🇵🇹
 - Sub-Region flag: 🏴󠁧󠁢󠁳󠁣󠁴󠁿
 - Keycap sequence: 2️⃣
+- Skin tone modifier: 🏻
 - Sequence using ZWJ (zero width joiner): 🤾🏽‍♀️
 "
 
@@ -142,7 +144,7 @@ More info about valid vs. recommended Emoji can also be found in this [blog arti
 
 ### Emoji Property Regexes
 
-Ruby includes native regex Emoji properties, as listed in the following table. You can also opt-in to use the `*_PROP_*` regexes to get the Emoji support level of this gem (instead of Rubies).
+Ruby includes native regex Emoji properties, as listed in the following table. You can also opt-in to use the `*_PROP_*` regexes to get the Emoji support level of this gem (instead of Ruby's).
 
 Gem Regex (`Unicode::Emoji`'s Emoji support level) | Native Regex (Ruby's Emoji support level)
 ---------------------------------------------------|------------------------------------------
