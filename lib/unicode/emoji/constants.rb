@@ -44,6 +44,6 @@ module Unicode
 
     # The current list of Emoji components that should have a visual representation
     # Currently skin tone modifiers + hair components
-    VISUAL_COMPONENT              = [*0x1F3FB..0x1F3FF, *0x1F9B0..0x1F9B3]
+    VISUAL_COMPONENT              = [*0x1F3FB..0x1F3FF, *0x1F9B0..0x1F9B3].freeze
   end
 end
