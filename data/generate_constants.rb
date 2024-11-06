@@ -301,9 +301,6 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # Matches only basic single, textual emoji, ignores components like modifiers or simple digits
   regexes[:REGEX_TEXT] = Regexp.compile(text_emoji)
 
-  # Same as \p{Emoji} - to be removed or renamed
-  regexes[:REGEX_ANY] = Regexp.compile(emoji_character)
-
   # Export regexes for Emoji properties so they can be used with newer Unicode than Ruby's
   regexes[:REGEX_PROP_EMOJI] = Regexp.compile(emoji_character)
   regexes[:REGEX_PROP_MODIFIER] = Regexp.compile(emoji_modifier)
