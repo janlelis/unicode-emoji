@@ -17,7 +17,8 @@ module Unicode
       EMOJI_MODIFIERS
       EXTENDED_PICTOGRAPHIC
       EXTENDED_PICTOGRAPHIC_NO_EMOJI
-      EMOJI_KEYCAPS VALID_REGION_FLAGS
+      EMOJI_KEYCAPS
+      VALID_REGION_FLAGS
       VALID_SUBDIVISIONS
       RECOMMENDED_SUBDIVISION_FLAGS
       RECOMMENDED_ZWJ_SEQUENCES
@@ -57,6 +58,7 @@ module Unicode
       REGEX_PROP_PRESENTATION
       REGEX_PICTO
       REGEX_PICTO_NO_EMOJI
+      REGEX_EMOJI_KEYCAP
     ].each do |const_name|
       autoload const_name, File.join(generated_constants_dirpath, const_name.downcase)
     end

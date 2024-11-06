@@ -315,6 +315,9 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   regexes[:REGEX_PICTO] = Regexp.compile(picto)
   regexes[:REGEX_PICTO_NO_EMOJI] = Regexp.compile(picto_no_emoji)
 
+  # Emoji keycaps
+  regexes[:REGEX_EMOJI_KEYCAP] = Regexp.compile(emoji_keycap_sequence)
+
   regexes
 end
 

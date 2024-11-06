@@ -669,6 +669,21 @@ describe Unicode::Emoji do
     end
   end
 
+  describe "REGEX_EMOJI_KEYCAP" do
+    it "matches emoji keycap sequences" do
+      "2️⃣ keycap: 2" =~ Unicode::Emoji::REGEX_EMOJI_KEYCAP
+      assert_equal "2️⃣", $&
+    end
+
+    it "does not match non-emoji keycap sequences" do
+      "8⃣ text keycap: 8" =~ Unicode::Emoji::REGEX_EMOJI_KEYCAP
+      assert_nil $&
+
+      "#⃣ text keycap: #" =~ Unicode::Emoji::REGEX_EMOJI_KEYCAP
+      assert_nil $&
+    end
+  end
+
   describe "REGEX_PICTO" do
     it "matches codepoints with Extended_Pictograph property (almost all emoji are, but also others)" do
       matches = "U+1F32D 🌭 HOT DOG, U+203C ‼ DOUBLE EXCLAMATION MARK, U+26E8 ⛨ BLACK CROSS ON SHIELD".scan(Unicode::Emoji::REGEX_PICTO)

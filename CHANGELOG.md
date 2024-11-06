@@ -4,11 +4,11 @@
 - **Breaking change:** Regexes now include single skin tone modifiers and hair components.
   They were previously considered to be invalid partial Emoji, however since they are supposed to be
   displayed as Emoji in isolation, they are now part of the regexes (see *ED-20* in UTS51).
-  
+- **Breaking change:** Drop `REGEX_ANY` in favor of `REGEX_PROP_EMOJI`
 - Expose regexes for Emoji props (`REGEX_PROP_*`). The advantage over using the native regex properties
   directly is that you will be able to use the Emoji support level of this gem instead of Ruby's.
   For example, as of releasing this, the current Emoji version is 16.0, while Ruby is at 15.0.
-- Deprecate `REGEX_ANY` in favor of `REGEX_PROP_EMOJI`
+- Add `REGEX_EMOJI_KEYCAP` for matching specifically Emoji keycaps
 - Use character class instead of lookbehind for native text emoji and non-emoji pictographic regexes
 
 ### 3.8.0
