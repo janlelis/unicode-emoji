@@ -3,6 +3,6 @@
 
 module Unicode
   module Emoji
-    REGEX_BASIC = /(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)/
+    REGEX_BASIC = /(?:(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|[🏻-🏿🦰-🦳])/
   end
 end

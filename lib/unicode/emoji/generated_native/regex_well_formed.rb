@@ -3,6 +3,6 @@
 
 module Unicode
   module Emoji
-    REGEX_WELL_FORMED = /(?:(?:(?:(?:\p{EBase}\p{EMod}|(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{Emoji})‍)+(?:\p{EBase}\p{EMod}|(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{Emoji}))|(?:(?:(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{EBase}\p{EMod})[󠀰-󠀹󠁡-󠁺]{1,30}󠁿)|\p{RI}{2}|(?:[\#\*0-9]️⃣|\p{EBase}\p{EMod}|(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)))/
+    REGEX_WELL_FORMED = /(?:(?:(?:(?:\p{EBase}\p{EMod}|(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{Emoji})‍)+(?:\p{EBase}\p{EMod}|(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{Emoji}))|(?:(?:(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?)|\p{EBase}\p{EMod})[󠀰-󠀹󠁡-󠁺]{1,30}󠁿)|\p{RI}{2}|(?:[\#\*0-9]️⃣|\p{EBase}\p{EMod}|(?!\p{EComp})(?:[\p{Emoji}&&\P{EPres}]️|\p{EPres}(?!︎)️?))|[🏻-🏿🦰-🦳])/
   end
 end

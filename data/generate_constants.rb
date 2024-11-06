@@ -69,6 +69,8 @@ def pack_and_join(ords)
 end
 
 def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_component:, emoji_presentation:, text_presentation:, picto:, picto_no_emoji:)
+  visual_component = pack_and_join(VISUAL_COMPONENT)
+
   emoji_presentation_sequence = \
     join(
       text_presentation + pack(EMOJI_VARIATION_SELECTOR),
@@ -77,6 +79,12 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
 
   non_component_emoji_presentation_sequence = \
     "(?!" + emoji_component + ")" + emoji_presentation_sequence
+
+  basic_emoji = \
+    join(
+      non_component_emoji_presentation_sequence,
+      visual_component,
+    )
 
   text_keycap_sequence = \
     pack_and_join(EMOJI_KEYCAPS) + pack(EMOJI_KEYCAP_SUFFIX)
@@ -169,6 +177,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_rgi_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
     )
 
   emoji_rgi_sequence_include_text = \
@@ -177,6 +186,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_rgi_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
       text_emoji,
     )
 
@@ -186,6 +196,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_rgi_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
     )
 
   emoji_rgi_include_mqe_uqe_sequence = \
@@ -195,6 +206,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_rgi_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
     )
 
   emoji_valid_sequence = \
@@ -203,6 +215,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_valid_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
     )
 
   emoji_valid_sequence_include_text = \
@@ -211,6 +224,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_valid_tag_sequence,
       emoji_valid_flag_sequence,
       emoji_core_sequence,
+      visual_component,
       text_emoji,
     )
 
@@ -220,6 +234,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_well_formed_tag_sequence,
       emoji_well_formed_flag_sequence,
       emoji_core_sequence,
+      visual_component,
     )
 
   emoji_well_formed_sequence_include_text = \
@@ -228,6 +243,7 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_well_formed_tag_sequence,
       emoji_well_formed_flag_sequence,
       emoji_core_sequence,
+      visual_component,
       text_emoji,
     )
 
@@ -279,10 +295,10 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   # See https://www.unicode.org/reports/tr51/#EBNF_and_Regex
   regexes[:REGEX_POSSIBLE] = Regexp.compile(emoji_possible)
 
-  # Matches only basic single, non-textual emoji, ignores "components" like modifiers or simple digits
-  regexes[:REGEX_BASIC] = Regexp.compile(non_component_emoji_presentation_sequence)
+  # Matches only basic single, non-textual emoji, ignores some components like simple digits
+  regexes[:REGEX_BASIC] = Regexp.compile(basic_emoji)
 
-  # Matches only basic single, textual emoji, ignores "components" like modifiers or simple digits
+  # Matches only basic single, textual emoji, ignores components like modifiers or simple digits
   regexes[:REGEX_TEXT] = Regexp.compile(text_emoji)
 
   # Same as \p{Emoji} - to be removed or renamed

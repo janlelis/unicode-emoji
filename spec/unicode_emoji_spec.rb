@@ -39,8 +39,19 @@ describe Unicode::Emoji do
       assert_equal "▶\u{FE0F}", $&
     end
 
-    it "does not match singleton 'component' emoji codepoints" do
+    it "matches singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX
+      assert_equal "🏻", $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX
+      assert_equal "🦰", $&
+    end
+
+    it "does not match singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX
+      assert_nil $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX
       assert_nil $&
     end
 
@@ -94,12 +105,12 @@ describe Unicode::Emoji do
 
     it "does not match MQE zwj sequences" do
       "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX
-      refute_equal `🤾🏽‍♀`, $&
+      refute_equal "🤾🏽‍♀", $&
     end
 
     it "does not match UQE emoji" do
       "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX
-      refute_equal `🏌‍♂️`, $&
+      refute_equal "🏌‍♂️", $&
     end
 
     it "does not match valid zwj sequences that are not recommended" do
@@ -153,24 +164,24 @@ describe Unicode::Emoji do
   describe "REGEX_INCLUDE_MQE" do
     it "matches MQE emoji" do
       "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE
-      assert_equal `🤾🏽‍♀`, $&
+      assert_equal "🤾🏽‍♀", $&
     end
 
     it "does not match UQE emoji" do
       "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE
-      refute_equal `🏌‍♂️`, $&
+      refute_equal "🏌‍♂️", $&
     end
   end
 
   describe "REGEX_INCLUDE_MQE_UQE" do
     it "matches MQE emoji" do
       "🤾🏽‍♀ woman playing handball: medium skin tone, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE_UQE
-      assert_equal `🤾🏽‍♀`, $&
+      assert_equal "🤾🏽‍♀", $&
     end
 
     it "matches UQE emoji" do
       "🏌‍♂️ man golfing, missing VS16" =~ Unicode::Emoji::REGEX_INCLUDE_MQE_UQE
-      assert_equal `🏌‍♂️`, $&
+      assert_equal "🏌‍♂️", $&
     end
   end
 
@@ -200,8 +211,19 @@ describe Unicode::Emoji do
       assert_equal "▶\u{FE0F}", $&
     end
 
-    it "does not match singleton 'component' emoji codepoints" do
+    it "matches singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_VALID
+      assert_equal "🏻", $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX_VALID
+      assert_equal "🦰", $&
+    end
+
+    it "does not match singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX_VALID
+      assert_nil $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX_VALID
       assert_nil $&
     end
 
@@ -295,8 +317,19 @@ describe Unicode::Emoji do
       assert_equal "▶\u{FE0F}", $&
     end
 
-    it "does not match singleton 'component' emoji codepoints" do
+    it "matches singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🏻", $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_equal "🦰", $&
+    end
+
+    it "does not match singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX_WELL_FORMED
+      assert_nil $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX_WELL_FORMED
       assert_nil $&
     end
 
@@ -395,9 +428,20 @@ describe Unicode::Emoji do
       assert_equal "▶\u{FE0F}", $&
     end
 
-    it "matches singleton 'component' emoji codepoints" do
+    it "matches singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_POSSIBLE
       assert_equal "🏻", $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🦰", $&
+    end
+
+    it "matches singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "1", $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX_POSSIBLE
+      assert_equal "🇦", $&
     end
 
     it "matches modified emoji if modifier base emoji is used" do
@@ -486,17 +530,28 @@ describe Unicode::Emoji do
     end
 
     it "does not match textual singleton emoji" do
-      "▶ play button" =~ Unicode::Emoji::REGEX
+      "▶ play button" =~ Unicode::Emoji::REGEX_BASIC
       assert_nil $&
     end
 
     it "matches textual singleton emoji in combination with emoji variation selector" do
-      "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX
+      "▶\u{FE0F} play button" =~ Unicode::Emoji::REGEX_BASIC
       assert_equal "▶\u{FE0F}", $&
     end
 
-    it "does not match singleton 'component' emoji codepoints" do
+    it "matches singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_BASIC
+      assert_equal "🏻", $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX_BASIC
+      assert_equal "🦰", $&
+    end
+
+    it "does not match singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX_BASIC
+      assert_nil $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX_BASIC
       assert_nil $&
     end
 
@@ -557,8 +612,19 @@ describe Unicode::Emoji do
       assert_nil $&
     end
 
-    it "does not match singleton 'component' emoji codepoints" do
+    it "does not match singleton skin tone modifiers and hair components" do
       "🏻 light skin tone" =~ Unicode::Emoji::REGEX_TEXT
+      assert_nil $&
+
+      "🦰 emoji component red hair" =~ Unicode::Emoji::REGEX_TEXT
+      assert_nil $&
+    end
+
+    it "does not match singleton components that are not skin tone modifiers or hair components" do
+      "1 digit one" =~ Unicode::Emoji::REGEX_TEXT
+      assert_nil $&
+
+      "🇦 regional indicator symbol letter a" =~ Unicode::Emoji::REGEX_TEXT
       assert_nil $&
     end
 
