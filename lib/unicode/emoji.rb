@@ -34,7 +34,7 @@ module Unicode
     end
 
     generated_constants_dirpath = File.expand_path(
-      EMOJI_VERSION == Unicode::Version.emoji_version ? "emoji/generated_native/" : "emoji/generated/",
+      EMOJI_VERSION == RbConfig::CONFIG["UNICODE_EMOJI_VERSION"] ? "emoji/generated_native/" : "emoji/generated/",
       __dir__
     )
 
