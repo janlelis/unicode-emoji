@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "unicode/version"
-
 require_relative "emoji/constants"
 
 module Unicode

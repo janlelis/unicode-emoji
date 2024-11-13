@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 4.0.1
+## 4.0.2
 
 - Directly use `RbConfig::CONFIG["UNICODE_EMOJI_VERSION"]` to detect Ruby's Emoji version,
   drop unicode-version dependency
