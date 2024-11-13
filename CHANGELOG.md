@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.3
+
+- Remove emoji-test.txt from Rubygems package
+
 ## 4.0.2
 
 - Directly use `RbConfig::CONFIG["UNICODE_EMOJI_VERSION"]` to detect Ruby's Emoji version,

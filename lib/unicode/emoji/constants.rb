@@ -2,7 +2,7 @@
 
 module Unicode
   module Emoji
-    VERSION = "4.0.2"
+    VERSION = "4.0.3"
     EMOJI_VERSION = "16.0"
     CLDR_VERSION = "46"
     DATA_DIRECTORY = File.expand_path('../../../data', __dir__).freeze
