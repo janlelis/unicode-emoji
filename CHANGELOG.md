@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.4
+
+- Add `REGEX_TEXT_PRESENTATION` to be able to match for raw default-text Emoji codepoints
+
 ## 4.0.3
 
 - Remove emoji-test.txt from Rubygems package

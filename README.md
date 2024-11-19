@@ -153,6 +153,7 @@ Gem Regex (`Unicode::Emoji`'s Emoji support level) | Native Regex (Ruby's Emoji 
 `Unicode::Emoji::REGEX_PROP_MODIFIER_BASE` | `/\p{EBase}/`
 `Unicode::Emoji::REGEX_PROP_COMPONENT`     | `/\p{EComp}/`
 `Unicode::Emoji::REGEX_PROP_PRESENTATION`  | `/\p{EPres}/`
+`Unicode::Emoji::REGEX_TEXT_PRESENTATION`  | `/[\p{Emoji}&&\P{EPres}]/`
 
 #### Extended Pictographic Regex
 
