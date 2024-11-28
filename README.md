@@ -144,7 +144,7 @@ More info about valid vs. recommended Emoji can also be found in this [blog arti
 
 ### Emoji Property Regexes
 
-Ruby includes native regex Emoji properties, as listed in the following table. You can also opt-in to use the `*_PROP_*` regexes to get the Emoji support level of this gem (instead of Ruby's).
+Ruby includes native regex Emoji properties, as listed in the following table. You can also opt-in to use the `*_PROP_*` regexes to get the Emoji support level of this gem (instead of Ruby's). [Which Emoji version does Ruby support?](https://idiosyncratic-ruby.com/73-unicode-version-mapping.html#ruby--emoji)
 
 Gem Regex (`Unicode::Emoji`'s Emoji support level) | Native Regex (Ruby's Emoji support level)
 ---------------------------------------------------|------------------------------------------
