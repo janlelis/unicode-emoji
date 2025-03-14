@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next
+
+- Update valid subdivisions to CLDR 47 (no changes)
+
 ## 4.0.4
 
 - Add `REGEX_TEXT_PRESENTATION` to be able to match for raw default-text Emoji codepoints
