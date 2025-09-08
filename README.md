@@ -8,7 +8,7 @@ Additional features:
 - A categorized list of Emoji (RGI: Recommended for General Interchange)
 - Retrieve Emoji properties info about specific codepoints (Emoji_Modifier, Emoji_Presentation, etc.)
 
-Emoji version: **16.0** (September 2024)
+Emoji version: **17.0** (September 2025)
 
 CLDR version (used for sub-region flags): **47** (March 2025)
 
@@ -201,5 +201,5 @@ Unicode::Emoji.properties "☝" # => ["Emoji", "Emoji_Modifier_Base"]
 
 ## MIT
 
-- Copyright (C) 2017-2024 Jan Lelis <https://janlelis.com>. Released under the MIT license.
+- Copyright (C) 2017-2025 Jan Lelis <https://janlelis.com>. Released under the MIT license.
 - Unicode data: https://www.unicode.org/copyright.html#Exhibit1
