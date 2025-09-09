@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 4.1.0 (unreleased)
+## 4.1.0
 
 - Unicode 17
 - Update valid subdivisions to CLDR 47 (no changes)
