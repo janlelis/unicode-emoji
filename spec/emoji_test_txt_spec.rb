@@ -19,7 +19,7 @@ describe "emoji-test.txt" do
       puts "Downloading emoji-test.txt from the consortium"
       URI.open "https://www.unicode.org/Public/#{Unicode::Emoji::UNICODE_VERSION}/emoji/emoji-test.txt" do |f|
         file = f.read
-        File.write(File.join(__dir__, "data/emoji-test.txt"), @file)
+        File.write(File.join(__dir__, "data/emoji-test.txt"), file)
       end
     end
 
