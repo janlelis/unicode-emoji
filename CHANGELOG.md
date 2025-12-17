@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 4.2.0 (unreleased)
+## 4.2.0
 
 - Allow Ruby 4.0
 - Remove Non-Emoji pictographs from spec, since they have been removed in Unicode 17

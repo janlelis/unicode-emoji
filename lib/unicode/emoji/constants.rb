@@ -2,7 +2,7 @@
 
 module Unicode
   module Emoji
-    VERSION = "4.1.0"
+    VERSION = "4.2.0"
     EMOJI_VERSION = "17.0"
     UNICODE_VERSION = "17.0.0"
     CLDR_VERSION = "48"
