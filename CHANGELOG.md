@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## 4.1.1 (unreleased)
+## 4.2.0 (unreleased)
 
 - Allow Ruby 4.0
 - Remove Non-Emoji pictographs from spec, since they have been removed in Unicode 17
+- Update valid subdivisions to CLDR 48 (no changes)
 
 ## 4.1.0
 
