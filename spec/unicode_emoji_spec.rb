@@ -692,14 +692,14 @@ describe Unicode::Emoji do
   describe "REGEX_PICTO" do
     it "matches codepoints with Extended_Pictograph property (almost all emoji are, but also others)" do
       matches = "U+1F32D 🌭 HOT DOG, U+203C ‼ DOUBLE EXCLAMATION MARK, U+26E8 ⛨ BLACK CROSS ON SHIELD".scan(Unicode::Emoji::REGEX_PICTO)
-      assert_equal ["🌭", "‼", "⛨"], matches
+      assert_equal ["🌭", "‼"], matches
     end
   end
 
   describe "REGEX_PICTO_NO_EMOJI" do
     it "matches codepoints with Extended_Pictograph property, but no Emoji property" do
       matches = "U+1F32D 🌭 HOT DOG, U+203C ‼ DOUBLE EXCLAMATION MARK, U+26E8 ⛨ BLACK CROSS ON SHIELD".scan(Unicode::Emoji::REGEX_PICTO_NO_EMOJI)
-      assert_equal ["⛨"], matches
+      assert_equal [], matches
     end
   end
 
