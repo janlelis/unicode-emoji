@@ -10,7 +10,7 @@ Additional features:
 
 Emoji version: **17.0** (September 2025)
 
-CLDR version (used for sub-region flags): **47** (March 2025)
+CLDR version (used for sub-region flags): **48** (October 2025)
 
 ## Gemfile
 
