@@ -9,7 +9,7 @@ module Unicode
     DATA_DIRECTORY = File.expand_path('../../../data', __dir__).freeze
     INDEX_FILENAME = (DATA_DIRECTORY + "/emoji.marshal.gz").freeze
 
-    # Unicode properties, see https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt
+    # Unicode properties, see https://www.unicode.org/Public/17.0.0/ucd/emoji/emoji-data.txt
     PROPERTY_NAMES = {
       E: "Emoji",
       B: "Emoji_Modifier_Base",
