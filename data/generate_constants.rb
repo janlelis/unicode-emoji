@@ -68,6 +68,42 @@ def pack_and_join(ords)
   end
 end
 
+def expand_ranges(strings)
+  strings.flat_map do |string|
+    chars = string.chars
+    separator = chars.index("~")
+    next [string] unless separator
+
+    (chars[separator - 1]..chars[separator + 1]).map do |char|
+      (chars[0...(separator - 1)] + [char] + chars[separator + 2..]).join
+    end
+  end
+end
+
+# Group common prefixes so the subdivision list does not become one large
+# alternation that every REGEX_VALID match has to traverse.
+def trie_pattern(sequences)
+  terminal = sequences.any?(&:empty?)
+  children = sequences.reject(&:empty?).group_by(&:first)
+  suffix_groups = children.each_with_object(Hash.new{ |hash, suffix| hash[suffix] = [] }) do |(ord, values), groups|
+    suffix = trie_pattern(values.map{ |value| value.drop(1) })
+    groups[suffix] << ord
+  end
+
+  branches = suffix_groups.map do |suffix, ords|
+    (ords.one? ? pack(ords.first) : pack_and_join(ords)) + suffix
+  end
+  pattern = if branches.empty?
+    ""
+  elsif branches.one?
+    branches.first
+  else
+    join(*branches)
+  end
+
+  terminal && !pattern.empty? ? "(?:" + pattern + ")?" : pattern
+end
+
 def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_component:, emoji_presentation:, text_presentation:, picto:, picto_no_emoji:)
   visual_component = pack_and_join(VISUAL_COMPONENT)
 
@@ -127,9 +163,11 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
   emoji_valid_tag_sequence = \
     "(?:" +
       pack(EMOJI_TAG_BASE_FLAG) +
-      "(?:" + VALID_SUBDIVISIONS.sort_by(&:length).reverse.map{ |sd|
-        sd.tr("\u{30}-\u{39}\u{61}-\u{7A}", "\u{E0030}-\u{E0039}\u{E0061}-\u{E007A}")
-      }.join("|") + ")" +
+      trie_pattern(
+        expand_ranges(INDEX[:SD]).map{ |sd|
+          sd.tr("\u{30}-\u{39}\u{61}-\u{7A}", "\u{E0030}-\u{E0039}\u{E0061}-\u{E007A}").codepoints
+        }
+      ) +
       pack(CANCEL_TAG) +
     ")"
 
@@ -166,9 +204,11 @@ def compile(emoji_character:, emoji_modifier:, emoji_modifier_base:, emoji_compo
       emoji_character,
     )
 
+  # Every repeated element ends in ZWJ, so backtracking cannot turn one into
+  # the required final element.
   emoji_valid_zwj_sequence = \
     "(?:" +
-      "(?:" + emoji_valid_zwj_element + pack(ZWJ) + ")+" + emoji_valid_zwj_element +
+      "(?>(?:" + emoji_valid_zwj_element + pack(ZWJ) + ")+)" + emoji_valid_zwj_element +
     ")"
 
   emoji_rgi_sequence = \
