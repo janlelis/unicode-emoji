@@ -45,7 +45,7 @@ module Unicode
     VALID_REGION_FLAGS            = INDEX[:FLAGS].freeze
 
     # The list of valid subdivisions in regex character class syntax
-    VALID_SUBDIVISIONS            = INDEX[:SD].map{_1.sub(/(.)~(.)/, '[\1-\2]') }
+    VALID_SUBDIVISIONS            = INDEX[:SD].map{_1.sub(/(.)~(.)/, '[\1-\2]') }.freeze
 
     # The list RGI tag sequence flags
     RECOMMENDED_SUBDIVISION_FLAGS = INDEX[:TAGS].freeze
