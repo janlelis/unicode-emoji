@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 4.3.0 (unreleased)
+## 4.3.0
 
 - Unicode / Emoji 18.0
 
