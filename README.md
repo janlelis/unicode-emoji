@@ -8,7 +8,7 @@ Additional features:
 - A categorized list of Emoji (RGI: Recommended for General Interchange)
 - Retrieve Emoji properties info about specific codepoints (Emoji_Modifier, Emoji_Presentation, etc.)
 
-Emoji version: **17.0** (September 2025)
+Emoji version: **18.0** (September 2026)
 
 CLDR version (used for sub-region flags): **48** (October 2025)
 
@@ -184,7 +184,7 @@ A list of all Emoji (generated from this gem) can be found at [character.constru
 
 ## Usage – Properties Data
 
-Allows you to access the codepoint data for a single character form Unicode's [emoji-data.txt](https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt) file:
+Allows you to access the codepoint data for a single character form Unicode's [emoji-data.txt](https://www.unicode.org/Public/18.0.0/ucd/emoji/emoji-data.txt) file:
 
 ```ruby
 require "unicode/emoji"

@@ -64,7 +64,7 @@ module Unicode
     # Return Emoji properties of character as an Array or nil
     # See PROPERTY_NAMES constant for possible properties
     # 
-    # Source: see https://www.unicode.org/Public/16.0.0/ucd/emoji/emoji-data.txt
+    # Source: see https://www.unicode.org/Public/18.0.0/ucd/emoji/emoji-data.txt
     def self.properties(char)
       ord = get_codepoint_value(char)
       props = INDEX[:PROPERTIES][ord]

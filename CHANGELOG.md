@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.3.0 (unreleased)
+
+- Unicode / Emoji 18.0
+
 ## 4.2.0
 
 - Allow Ruby 4.0
